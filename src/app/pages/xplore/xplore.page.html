@@ -1,0 +1,78 @@
+
+<ion-content>
+  <main class="main">
+     <aside class="aside-container">
+   
+    
+     </aside>
+     <section class="content-container">
+       <header class="header">
+         <h1 class="first-header"> Xplore Page</h1>
+       </header>
+       <div class="scroll-container">
+     
+          <h4 class="booking-header"></h4>
+         <div class="add-tattoo" *ngFor="let tattoo of Tattoos">
+           <img src="{{tattoo.doc.image}}" class="tattoo-image" alt="">
+          <div class="info-tattoo">
+            <article>
+              <h4 style="white-space: normal; font-size: 2.8vh;">{{ tattoo.doc.name}}</h4>
+              <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.doc.pricerange}}</p>
+              <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.doc.description}} </p>
+              <button (click)="Booking()">Book</button>
+              
+ 
+              
+            </article>
+          </div>  
+       
+         </div>
+     
+           
+       </div>
+       <div class="sub-container">
+           <div class="booking-container">
+            <!--   <div class="no-bookings">
+               <p>You have no bookings yet.</p>
+             </div>  -->
+             <h4 class="booking-header">Design</h4>
+             <div class="bookings-list">
+               
+            
+                  <div class="scroll-container">
+     
+          <h4 class="booking-header"></h4>
+         <div class="add-tattoo" *ngFor="let tattoo of Design">
+           <img src="{{tattoo.image}}" class="tattoo-image" alt="">
+          <div class="info-tattoo">
+            <article>
+              <h4 style="white-space: normal; font-size: 2.8vh;">{{ tattoo.name}}</h4>
+              <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
+              <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>
+              
+ 
+            </article>
+          </div>  
+       
+         </div>
+     
+           
+       </div>
+ 
+             
+             </div>
+        
+            
+           </div>
+       <div class="analytics-container">
+         
+           <div class="graghs">
+             <p>Gragh will be placed here (Back end)</p>
+         </div>
+       </div>
+       </div>
+       <ion-button (click)="logout()"> logout</ion-button>
+     </section>
+  </main>
+ </ion-content>
+ 
