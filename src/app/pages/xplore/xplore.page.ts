@@ -2,14 +2,10 @@ import { SignInPage } from './../../sign-in/sign-in.page';
 import { BookingModalPage } from './../../booking-modal/booking-modal.page';
 import { DeliverDataService } from './../../deliver-data.service';
 import { RegisterPage } from './../../register/register.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
-
-
-
-
-
+import * as anime from 'animejs';
 
 @Component({
   selector: 'app-xplore',
@@ -21,7 +17,9 @@ import { ModalController, AlertController } from '@ionic/angular';
 export class XplorePage implements OnInit {
 
 
-
+/* Animations */
+popoverState = false;
+popoverDiv = document.getElementsByClassName('popOver');
 
   tattoo = {
     name: '',
@@ -49,15 +47,19 @@ export class XplorePage implements OnInit {
 
   showProfile1 : boolean = false;
 
-  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController) {
 
+
+  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController, private element: ElementRef, public render: Renderer2) {
+ 
+    
+      
    }
 
   
    
- 
 
   ngOnInit() {
+
     
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
@@ -171,6 +173,18 @@ logOut(){
   
     
   }
+  viewNotifications() {
+   this.popoverState = !this.popoverState
+   if (this.popoverState) {
+     this.render.setStyle(this.popoverDiv[0],'display','block');
+   } else {
+     setTimeout(() => {
+      this.render.setStyle(this.popoverDiv[0],'display','none');
+     }, 500);
+   }
+   
+    
+  }
 
 
   pb(){
@@ -188,7 +202,7 @@ logOut(){
       doc: {}
     }
    
-
+   
   
 
     // this.db.collection('Tattoo').onSnapshot(data => {
