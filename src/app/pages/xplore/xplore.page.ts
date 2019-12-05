@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { SignInPage } from './../../sign-in/sign-in.page';
+import { BookingModalPage } from './../../booking-modal/booking-modal.page';
+import { DeliverDataService } from './../../deliver-data.service';
+import { RegisterPage } from './../../register/register.page';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
-import {DatasavedService} from '../../datasaved.service'
-import { Router } from '@angular/router';
-
-
+import { ModalController, AlertController } from '@ionic/angular';
+// import * as anime from 'animejs';
 
 @Component({
   selector: 'app-xplore',
   templateUrl: './xplore.page.html',
   styleUrls: ['./xplore.page.scss'],
 })
+
+
 export class XplorePage implements OnInit {
+
+
+/* Animations */
+popoverState = false;
+popoverDiv = document.getElementsByClassName('popOver');
 
   tattoo = {
     name: '',
@@ -31,17 +40,51 @@ export class XplorePage implements OnInit {
 
   Design = [];
 
-  constructor(public DatasavedService : DatasavedService,public router : Router) {
+
+  Sketch = [];
+  PreviouseWork = [];
+  porpular = []
+
+  showProfile1 : boolean = false;
+
+
+
+  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController, private element: ElementRef, public render: Renderer2) {
+ 
     
-   
-  
+      
    }
 
   
    
- 
 
   ngOnInit() {
+
+    
+    this.db.collection("Tattoo").onSnapshot(data => {
+      data.forEach(item => {
+        if(item.exists){
+          if(item.data().categories === "Sketch/design"){
+            
+           this.Sketch.push(item.data());
+           console.log("11111111111111111",this.Sketch);
+          }
+        }
+      })
+    })
+
+
+    this.db.collection("Tattoo").onSnapshot(data => {
+      data.forEach(item => {
+        if(item.exists){
+          if(item.data().categories === "Previous work"){
+            
+           this.PreviouseWork.push(item.data());
+           console.log("11111111111111111",this.PreviouseWork);
+          }
+        }
+      })
+    })
 
 
     this.db.collection("Tattoo").onSnapshot(data => {
@@ -49,24 +92,98 @@ export class XplorePage implements OnInit {
         if(item.exists){
           if(item.data().categories === "Sketch/design"){
             
-           this.Design.push(item.data());
-           console.log("11111111111111111",this.Design);
+           this.porpular.push(item.data());
+           console.log("11111111111111111",this.Sketch);
           }
         }
       })
     })
+            
+}
 
+async CreateAccount(){
+
+  let modal = await this.modalController.create({
+    component : RegisterPage
+  })
+  return await modal.present();
+
+}
+
+
+async Login(){
+
+  let modal = await this.modalController.create({
+    component : SignInPage
+  })
+  return await modal.present();
+
+}
+
+logOut(){
+
+  firebase.auth().signOut().then(user => {
+    console.log("Logged out successfully");
+  }).catch(error => {
+    console.log("Something went wrong");
+    
+  })
+}
+
+ async Booking(tattoo){
+
+    if(firebase.auth().currentUser){
+
+      console.log("Your data ", tattoo);
+      console.log("Your uid here is ", firebase.auth().currentUser.uid);
+      console.log("Your email here is ", firebase.auth().currentUser.email);
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+      //   name : "Simon",
+      //   surname : "Cowel",
+      //   legnth : "153",
+      //   breadth : "353"
+      // })
+
+      this.DeliverDataService.dataSaved.category = tattoo.categories;
+      this.DeliverDataService.dataSaved.description = tattoo.description;
+      this.DeliverDataService.dataSaved.image = tattoo.image;
+      this.DeliverDataService.dataSaved.name = tattoo.name;
+      this.DeliverDataService.dataSaved.priceRange = tattoo.pricerange;
+
+      console.log("Your data in the service",  this.DeliverDataService.dataSaved);
+
+      const modal = await this.modalController.create({
+        component: BookingModalPage
+      });
+      return await  modal.present();
+
+
+    }else{
+
+      console.log("Sorry no user here");
+      const modal = await this.modalController.create({
+        component: RegisterPage
+      });
+      return await  modal.present();
+      
+    }
     
 
-               
-         
-
+   
+  
+    
   }
-
-
-  gotoBooking(tattoo){
-    this.DatasavedService.tattoo = tattoo;
-    this.router.navigateByUrl('/booking');
+  viewNotifications() {
+   this.popoverState = !this.popoverState
+   if (this.popoverState) {
+     this.render.setStyle(this.popoverDiv[0],'display','block');
+   } else {
+     setTimeout(() => {
+      this.render.setStyle(this.popoverDiv[0],'display','none');
+     }, 500);
+   }
+   
+    
   }
 
 
@@ -85,27 +202,7 @@ export class XplorePage implements OnInit {
       doc: {}
     }
    
-
-    this.db.collection('Tattoo').onSnapshot(data => {
-      this.Tattoos = [];
-      //console.log('tt',this.Tattoos);
-      data.forEach(item => {
-        firetattoo.doc = item.data();
-        firetattoo.docid = item.id;
-        this.Tattoos.push(firetattoo)
-
-        //console.log('all',this.Tattoos);
-
-         firetattoo = {
-          docid: '',
-          doc: {}
-        }
-      })
-
-      console.log("Your tattoos ",  this.Tattoos );
-      
-      
-    })
+   
 
   }
 

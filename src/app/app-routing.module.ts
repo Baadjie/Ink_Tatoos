@@ -12,8 +12,24 @@ const routes: Routes = [
   {
     path: 'xplore',
     loadChildren: () => import('./Pages/xplore/xplore.module').then( m => m.XplorePageModule)
+  },  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'booking-modal',
+    loadChildren: () => import('./booking-modal/booking-modal.module').then( m => m.BookingModalPageModule)
+  },
+  {
+    path: 'success-page',
+    loadChildren: () => import('./success-page/success-page.module').then( m => m.SuccessPagePageModule)
+  },
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   
+
 
 
 ];

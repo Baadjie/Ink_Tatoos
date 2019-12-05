@@ -1,16 +1,92 @@
-
 <ion-content>
-  <main class="main">
+
+  <div class="main animated fadeIn">
+    <section class="header">
+      <div class="user-header">
+          <div class="logo">
+            <p>LOGO</p>
+          </div>
+          <ul class="list">
+              <li><a>Explore</a></li>
+              <li><a>Contact Us</a></li>
+              <li  *ngIf = "!showProfile1"><a>Sign In</a></li>
+              <li class="btn-create-account" *ngIf = "!showProfile1"><a>Create Account</a></li>
+              <div class="profile"  *ngIf="showProfile1">
+                <p>Khuthy Muenda</p>
+                <div class="image-profile">
+                    <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
+                </div>
+              </div>
+              <div class="notifation" *ngIf="showProfile1">
+                  <ion-button (click)="viewNotifications()" color="light" fill="clear" size="large">
+                      <ion-icon name="notifications-outline"></ion-icon>
+                    </ion-button>
+                  <ion-badge class="badge" color="light">77</ion-badge>
+
+                  
+              </div>
+           
+          </ul>
+      </div>
+      <div class="information">
+
+          <div class="popOver animated" [ngClass]="{'fadeIn':popoverState, 'fadeOut':!popoverState}" id="popUp">
+                <p><small>My Notification</small></p>
+                <div class="cardList">
+                  <div class="cardItem">
+
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+
+                </div>
+            </div>
+
+
+
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio voluptate sit quam a
+            nimi at laudantium molestiae quo pariatur rem dolor consequuntur, facilis placeat perspiciatis 
+            tempora vel repudiandae neque aliquid laboriosam.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+
+  
+
+ 
+ <!--  <main class="main">
      <aside class="aside-container">
    
+
+      <button (click)="CreateAccount()">Create Account</button>
+      <br />
+      <button (click)="logOut()">Logout</button>
+      <br />
+      <button (click)="Login()">SignIn</button>
     
      </aside>
      <section class="content-container">
        <header class="header">
          <h1 class="first-header"> Xplore Page</h1>
+
+
+         <h2 *ngIf = "showProfile1">Show Profile</h2>
+
+
        </header>
        <div class="scroll-container">
-     
+     <h1>Popular Tattoos</h1>
           <h4 class="booking-header"></h4>
          <div class="add-tattoo" *ngFor="let tattoo of Tattoos">
            <img src="{{tattoo.doc.image}}" class="tattoo-image" alt="">
@@ -19,7 +95,8 @@
               <h4 style="white-space: normal; font-size: 2.8vh;">{{ tattoo.doc.name}}</h4>
               <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.doc.pricerange}}</p>
               <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.doc.description}} </p>
-              <button (click)="Booking()">Book</button>
+              
+              <button (click)="Booking(tattoo)">Book</button>
               
  
               
@@ -30,14 +107,65 @@
      
            
        </div>
-       <div class="sub-container">
+
+
+       <div class="scroll-container">
+     
+        <h1>Sketched Tattoos</h1>
+          <h4 class="booking-header"></h4>
+         <div class="add-tattoo" *ngFor="let tattoo of Sketch">
+           <img src="{{tattoo.image}}" class="tattoo-image" alt="">
+          <div class="info-tattoo">
+            <article>
+              <h4 style="white-space: normal; font-size: 2.8vh;">{{tattoo.name}}</h4>
+              <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
+              <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>
+              
+              <button (click)="Booking(tattoo)">Book</button>
+              
+ 
+              
+            </article>
+          </div>  
+       
+         </div>
+     
+           
+       </div>
+
+
+
+       <div class="scroll-container">
+          <h1>Prevoius Work</h1>
+          <h4 class="booking-header"></h4>
+         <div class="add-tattoo" *ngFor="let tattoo of PreviouseWork">
+           <img src="{{tattoo.image}}" class="tattoo-image" alt="">
+          <div class="info-tattoo">
+            <article>
+              <h4 style="white-space: normal; font-size: 2.8vh;">{{ tattoo.name}}</h4>
+              <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
+              <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>
+              
+              <button (click)="Booking(tattoo)">Book</button>
+              
+ 
+              
+            </article>
+          </div>  
+       
+         </div>
+     
+           
+       </div>
+ -->
+
+       <!-- <div class="sub-container">
            <div class="booking-container">
-            <!--   <div class="no-bookings">
-               <p>You have no bookings yet.</p>
-             </div>  -->
+           
              <h4 class="booking-header">Design</h4>
              <div class="bookings-list">
                
+      
             
                   <div class="scroll-container">
      
@@ -56,23 +184,10 @@
        
          </div>
      
-           
-       </div>
- 
-             
-             </div>
-        
-            
-           </div>
-       <!-- <div class="analytics-container">
-         
-           <div class="graghs">
-             <p>Gragh will be placed here (Back end)</p>
-         </div>
        </div> -->
        </div>
        <ion-button (click)="logout()"> logout</ion-button>
-     </section>
-  </main>
+   
+
  </ion-content>
  
