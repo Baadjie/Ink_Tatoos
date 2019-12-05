@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import {DatasavedService} from '../../datasaved.service'
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-xplore',
@@ -27,11 +31,10 @@ export class XplorePage implements OnInit {
 
   Design = [];
 
-  constructor() {
-
-
-      
-
+  constructor(public DatasavedService : DatasavedService,public router : Router) {
+    
+   
+  
    }
 
   
@@ -61,8 +64,9 @@ export class XplorePage implements OnInit {
   }
 
 
-  Booking(){
-    
+  gotoBooking(tattoo){
+    this.DatasavedService.tattoo = tattoo;
+    this.router.navigateByUrl('/booking');
   }
 
 

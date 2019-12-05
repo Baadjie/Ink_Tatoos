@@ -42,7 +42,7 @@
                   <div class="scroll-container">
      
           <h4 class="booking-header"></h4>
-         <div class="add-tattoo" *ngFor="let tattoo of Design">
+         <div class="add-tattoo" *ngFor="let tattoo of Design" (click)="gotoBooking(tattoo)">
            <img src="{{tattoo.image}}" class="tattoo-image" alt="">
           <div class="info-tattoo">
             <article>
@@ -64,12 +64,12 @@
         
             
            </div>
-       <div class="analytics-container">
+       <!-- <div class="analytics-container">
          
            <div class="graghs">
              <p>Gragh will be placed here (Back end)</p>
          </div>
-       </div>
+       </div> -->
        </div>
        <ion-button (click)="logout()"> logout</ion-button>
      </section>

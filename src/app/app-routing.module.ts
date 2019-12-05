@@ -13,6 +13,8 @@ const routes: Routes = [
     path: 'xplore',
     loadChildren: () => import('./Pages/xplore/xplore.module').then( m => m.XplorePageModule)
   },
+  
+
 
 ];
 
