@@ -21,7 +21,17 @@ export class XplorePage implements OnInit {
 popoverState = false;
 popoverDiv = document.getElementsByClassName('popOver');
 
-  tattoo = {
+datesState = false;
+dateIcon = 'ios-arrow-down';
+dateDiv = document.getElementsByClassName('dates');
+
+tattooInfo = false;
+tattooDiv = document.getElementsByClassName('info-tattoo');
+
+menu = false;
+menuDiv = document.getElementsByClassName('wraper-list');
+  
+tattoo = {
     name: '',
     pricerange: '',
     description: '',
@@ -46,6 +56,7 @@ popoverDiv = document.getElementsByClassName('popOver');
   porpular = []
 
   showProfile1 : boolean = false;
+ 
 
 
 
@@ -174,16 +185,60 @@ logOut(){
     
   }
   viewNotifications() {
-   this.popoverState = !this.popoverState
-   if (this.popoverState) {
-     this.render.setStyle(this.popoverDiv[0],'display','block');
-   } else {
-     setTimeout(() => {
-      this.render.setStyle(this.popoverDiv[0],'display','none');
-     }, 500);
-   }
-   
     
+    this.animate(); 
+    
+  }
+
+  animate() {
+    this.popoverState = !this.popoverState
+    if (this.popoverState) {
+      this.render.setStyle(this.popoverDiv[0],'display','block');
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.popoverDiv[0],'display','none');
+      }, 500);
+    }
+    
+  }
+  animateDates() {
+    this.datesState = !this.datesState
+    if (this.datesState) {
+      this.dateIcon = 'ios-arrow-up';
+      this.render.setStyle(this.dateDiv[0],'display','block');
+    } else {
+      setTimeout(() => {
+        this.dateIcon = 'ios-arrow-down';
+       this.render.setStyle(this.dateDiv[0],'display','none');
+      }, 500);
+    }
+    
+  }
+  tattooShowInfoAnimate(){
+    this.tattooInfo = !this.tattooInfo
+    if (this.tattooInfo) {
+     
+      this.render.setStyle(this.tattooDiv[0],'display','block');
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.tattooDiv[0],'display','none');
+      }, 500);
+    }
+  }
+
+  addClasseAnimate() {
+    this.menu = !this.menu
+    if (this.menu) {
+     
+       this.render.setStyle(this.menuDiv[0],'display','flex'); 
+      this.render.addClass(this.menuDiv[0],'dropped');
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.menuDiv[0],'display','none');
+       this.render.removeClass(this.menuDiv[0],'dropped');
+       
+      }, 500);
+    }
   }
 
 
