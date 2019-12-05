@@ -9,10 +9,6 @@ import { ModalController, AlertController } from '@ionic/angular';
 
 
 
-
-
-
-
 @Component({
   selector: 'app-xplore',
   templateUrl: './xplore.page.html',
@@ -23,7 +19,9 @@ import { ModalController, AlertController } from '@ionic/angular';
 export class XplorePage implements OnInit {
 
 
-
+/* Animations */
+popoverState = false;
+popoverDiv = document.getElementsByClassName('popOver');
 
   tattoo = {
     name: '',
@@ -287,6 +285,7 @@ logOut(){
   
     
   }
+ 
 
 
   pb(){

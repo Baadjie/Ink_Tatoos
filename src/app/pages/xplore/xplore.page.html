@@ -1,6 +1,71 @@
-
 <ion-content>
-  <main class="main">
+
+  <div class="main animated fadeIn">
+    <section class="header">
+      <div class="user-header">
+          <div class="logo">
+            <p>LOGO</p>
+          </div>
+          <ul class="list">
+              <li><a>Explore</a></li>
+              <li><a>Contact Us</a></li>
+              <li  *ngIf = "!showProfile1"><a>Sign In</a></li>
+              <li class="btn-create-account" *ngIf = "!showProfile1"><a>Create Account</a></li>
+              <div class="profile"  *ngIf="showProfile1">
+                <p>Khuthy Muenda</p>
+                <div class="image-profile">
+                    <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
+                </div>
+              </div>
+              <div class="notifation" *ngIf="showProfile1">
+                  <ion-button (click)="viewNotifications()" color="light" fill="clear" size="large">
+                      <ion-icon name="notifications-outline"></ion-icon>
+                    </ion-button>
+                  <ion-badge class="badge" color="light">77</ion-badge>
+
+                  
+              </div>
+           
+          </ul>
+      </div>
+      <div class="information">
+
+          <div class="popOver animated" [ngClass]="{'fadeIn':popoverState, 'fadeOut':!popoverState}" id="popUp">
+                <p><small>My Notification</small></p>
+                <div class="cardList">
+                  <div class="cardItem">
+
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+                  <div class="cardItem">
+                    
+                  </div>
+
+                </div>
+            </div>
+
+
+
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio voluptate sit quam a
+            nimi at laudantium molestiae quo pariatur rem dolor consequuntur, facilis placeat perspiciatis 
+            tempora vel repudiandae neque aliquid laboriosam.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+
+  
+
+ 
+ <!--  <main class="main">
      <aside class="aside-container">
    
 
@@ -93,7 +158,7 @@
      
            
        </div>
-
+ -->
 
        <!-- <div class="sub-container">
            <div class="booking-container">
@@ -137,8 +202,9 @@
        </div> -->
 
 
-       <ion-button (click)="logout()"> logout</ion-button>
+       <!-- <ion-button (click)="logout()"> logout</ion-button>
      </section>
-  </main>
+  </main -->
+
  </ion-content>
  
