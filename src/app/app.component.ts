@@ -17,6 +17,9 @@ import { firebaseConfig } from 'src/environments/environment';
 
 })
 export class AppComponent {
+
+
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,6 +27,10 @@ export class AppComponent {
   ) {
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
+
+    
+
+
   }
 
   initializeApp() {

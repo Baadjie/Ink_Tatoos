@@ -61,7 +61,7 @@ export class BookingModalPage implements OnInit {
  
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
 
-
+            
       category : this.category,
       description : this.description,
       image : this.image,

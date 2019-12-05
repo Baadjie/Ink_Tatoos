@@ -1,3 +1,4 @@
+import { NotificationsPage } from './../../notifications/notifications.page';
 import { SignInPage } from './../../sign-in/sign-in.page';
 import { BookingModalPage } from './../../booking-modal/booking-modal.page';
 import { DeliverDataService } from './../../deliver-data.service';
@@ -5,6 +6,7 @@ import { RegisterPage } from './../../register/register.page';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
+
 
 
 
@@ -46,18 +48,118 @@ export class XplorePage implements OnInit {
   Sketch = [];
   PreviouseWork = [];
   porpular = []
+  respnses = []
+  AcceptedData = [];
+ 
 
-  showProfile1 : boolean = false;
+  showProfile1 : boolean = true;
 
-  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController) {
+  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController) {
 
-   }
-
-  
+    this.respnses = this.DeliverDataService.AcceptedData;
+   
+    // if(this.DeliverDataService.AcceptedData.length > 0){
+    //   DeliverDataService.AcceptedData.forEach(data => {
+    //     this.respnses.push(data);
+    //   })
+    // }
    
  
 
+   }
+
+   async Notifications(){
+     console.log("ttttttttt", this.respnses);
+    let modal = await this.modalController.create({
+       component : NotificationsPage
+     })
+     return await modal.present();
+   }
+
+   load(){
+
+    if(firebase.auth().currentUser){
+
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(i => {
+        i.forEach(a => {
+  
+         if(a.data().bookingState === "Accepted"){
+              
+          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
+            myItem.forEach(doc => {
+              if(doc.data().bookingState === "Pending"){
+                this.AcceptedData.push(doc.data())
+                console.log("@@@@@@@@@", this.AcceptedData);
+              }   
+            })
+        
+      })
+      // return true; 
+         }
+        
+        })
+      })
+    }
+
+   }
+
+   ionViewWillEnter(){
+ 
+  
+    this.showProfile();
+
+
+
+
+
+
+    // this.db.collection('Tattoo').onSnapshot(data => {
+    //   this.Tattoos = [];
+    
+    //   data.forEach(item => {
+    //     firetattoo.doc = item.data();
+    //     firetattoo.docid = item.id;
+    //     this.Tattoos.push(firetattoo)
+
+      
+
+    //      firetattoo = {
+    //       docid: '',
+    //       doc: {}
+    //     }
+    //   })
+
+    //   console.log("Your tattoos ",  this.Tattoos );
+      
+      
+    // })
+
+  }
+
+  
+   showProfile(){
+
+    if(firebase.auth().currentUser){
+     
+      console.log("We have a user in here");
+      
+      this.showProfile1 = true;
+    }else{
+      console.log("We do not have a user");
+      this.showProfile1 = false;
+    }
+
+   }
+ 
+
   ngOnInit() {
+
+    this.showProfile();
+
+
+
+   
+
     
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
@@ -65,7 +167,7 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Sketch/design"){
             
            this.Sketch.push(item.data());
-           console.log("11111111111111111",this.Sketch);
+          //  console.log("11111111111111111",this.Sketch);
           }
         }
       })
@@ -78,7 +180,7 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Previous work"){
             
            this.PreviouseWork.push(item.data());
-           console.log("11111111111111111",this.PreviouseWork);
+          //  console.log("11111111111111111",this.PreviouseWork);
           }
         }
       })
@@ -91,7 +193,7 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Sketch/design"){
             
            this.porpular.push(item.data());
-           console.log("11111111111111111",this.Sketch);
+          //  console.log("11111111111111111",this.Sketch);
           }
         }
       })
@@ -99,22 +201,32 @@ export class XplorePage implements OnInit {
             
 }
 
+
+
 async CreateAccount(){
 
   let modal = await this.modalController.create({
     component : RegisterPage
   })
+  this.showProfile();
   return await modal.present();
-
 }
 
 
 async Login(){
 
-  let modal = await this.modalController.create({
-    component : SignInPage
-  })
-  return await modal.present();
+ 
+ 
+
+    let modal = await this.modalController.create({
+      component : SignInPage,
+    })
+    
+    this.showProfile();
+    return await modal.present();
+  
+
+
 
 }
 
@@ -122,16 +234,20 @@ logOut(){
 
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
+    this.showProfile();
   }).catch(error => {
     console.log("Something went wrong");
     
   })
+
+ 
 }
 
  async Booking(tattoo){
 
     if(firebase.auth().currentUser){
 
+      this.showProfile1 = true;
       console.log("Your data ", tattoo);
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
@@ -181,37 +297,6 @@ logOut(){
   obj = {id: null, obj : null}
 
 
-  ionViewWillEnter(){
-    
-    let firetattoo = {
-      docid: '',
-      doc: {}
-    }
-   
 
-  
-
-    // this.db.collection('Tattoo').onSnapshot(data => {
-    //   this.Tattoos = [];
-    
-    //   data.forEach(item => {
-    //     firetattoo.doc = item.data();
-    //     firetattoo.docid = item.id;
-    //     this.Tattoos.push(firetattoo)
-
-      
-
-    //      firetattoo = {
-    //       docid: '',
-    //       doc: {}
-    //     }
-    //   })
-
-    //   console.log("Your tattoos ",  this.Tattoos );
-      
-      
-    // })
-
-  }
 
 }
