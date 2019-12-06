@@ -57,15 +57,21 @@
 
 }
  .logo {
-    margin: 5%;
+    margin: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transform: translate(0, -40%);
+    
 } 
 
 @media only screen and (max-width: 768px) {
     .main {
         flex-direction: column;
     }
+}
+.signUp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

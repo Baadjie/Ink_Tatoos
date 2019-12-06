@@ -78,7 +78,8 @@ tattoo = {
    async Notifications(){
      console.log("ttttttttt", this.respnses);
     let modal = await this.modalController.create({
-       component : NotificationsPage
+       component : NotificationsPage,
+       cssClass: 'modalNotification'
      })
      return await modal.present();
    }
@@ -143,19 +144,14 @@ tattoo = {
 
   }
 
-  
-   showProfile(){
-
-    if(firebase.auth().currentUser){
-     
-      console.log("We have a user in here");
-      
-      this.showProfile1 = true;
-    }else{
-      console.log("We do not have a user");
-      this.showProfile1 = false;
-    }
-
+  showProfile(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.showProfile1 = true;
+      }else {
+        this.showProfile1 = false;
+      }
+    })
    }
  
 

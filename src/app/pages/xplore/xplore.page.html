@@ -12,23 +12,23 @@
                   <p>LOGO</p>
                 </div>
                 <ul class="list">
-                  <div class="wraper-list animated" [ngClass]="{'slideInDown':menu, 'tada':!menu}">
+                  <div class="wraper-list animated" [ngClass]="{'slideInDown':menu, 'tada':!menu}" >
                       <li><a>Explore</a></li>
                       <li><a>Contact Us</a></li>
-                      <li (click)="Login()" ><a>Sign In</a></li>
-                      <button class="btn-create-account riffle" (click)="CreateAccount()">Create Account</button>
+                      <li *ngIf="!showProfile1" (click)="Login()" ><a>Sign In</a></li>
+                      <button *ngIf="!showProfile1" class="btn-create-account riffle" (click)="CreateAccount()">Create Account</button>
                       <ion-button class="btn-close" (click)="addClasseAnimate()" color="light" fill="clear">
                         <ion-icon name="close"></ion-icon>
                       </ion-button>
                   </div>
                     
-                    <div class="profile" >
+                    <div class="profile" *ngIf="showProfile1">
                       <p class="profile-name">Khuthy Muenda</p>
                       <div class="image-profile">
                           <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
                       </div>
                     </div>
-                    <div class="notifation">
+                    <div class="notifation" *ngIf="showProfile1">
                         <ion-button (click)="Notifications()"  color="light" fill="clear" size="large">
                             <ion-icon name="notifications-outline"></ion-icon>
                           </ion-button>
@@ -77,7 +77,7 @@
           </section>
       
           <div class="tattoo-container">
-            <div class="tattoo">
+           <!--  <div class="tattoo">
                 <div class="header-tattoo">
                   <p>Popular Tattoos</p>
                 </div>
@@ -99,7 +99,7 @@
                         
                       </div> 
                 </div>
-            </div> 
+            </div>  -->
             <div class="tattoo">
               <div class="header-tattoo">
                 <p>Design Tattoos</p>
@@ -113,11 +113,7 @@
                         <article>
                           <h4 style="white-space: normal; font-size: 2.8vh;">{{tattoo.name}}</h4>
                           <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
-                          <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>
-                
-                          
-             
-                          
+                          <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>   
                         </article>
                       </div> 
                       <div class="booking">
@@ -141,13 +137,6 @@
                           <h4 style="white-space: normal; font-size: 2.8vh;">{{ tattoo.name}}</h4>
                           <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
                           <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>
-                          
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit recusandae, fuga repudiandae velit magnam veniam facere? Autem modi at unde veniam non impedit, perferendis ut ratione libero nisi? Pariatur, fugit.</p>
-                          
-                         
-                          
-             
-                          
                         </article>
       
                       </div> 

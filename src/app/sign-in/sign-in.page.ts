@@ -1,3 +1,4 @@
+import { RegisterPage } from './../register/register.page';
 import { XplorePage } from './../pages/xplore/xplore.page';
 import { DeliverDataService } from './../deliver-data.service';
 
@@ -24,9 +25,12 @@ export class SignInPage implements OnInit {
   password = "";
   AcceptedData = [];
 
+  showProfileState: boolean
+
   constructor(public modalController : ModalController, public Router : Router,  public DeliverDataService : DeliverDataService) { }
 
   ngOnInit() {
+    this.showProfile();
   }
 
 
@@ -83,5 +87,24 @@ export class SignInPage implements OnInit {
       'dismissed': true
     });
   }
+  showProfile(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.showProfileState = true;
+      }else {
+        this.showProfileState = false;
+      }
+    })
+   }
+ 
 
+  async CreateAccount(){
+
+    let modal = await this.modalController.create({
+      component : RegisterPage
+    })
+    
+    return await modal.present();
+  }
+  
 }
