@@ -379,7 +379,7 @@
 
 
         .tattoo {
-            flex: 0 0 50%;
+            flex: 0 0 80%;
             
             display: flex;
             flex-direction: column;
@@ -407,8 +407,9 @@
                         height: 100%;
                         width: 100%;
                         position: relative;
-
-
+                        border-radius: 6px;
+                        box-shadow: 0 0 3px #000;
+                        overflow: hidden;
                         .booking {
                             position: absolute;
                             bottom: 0;
@@ -552,11 +553,11 @@
             width: 100%;
 
             .tattoo {
-                flex: 0 0 50%;
+                flex: 0 0 80%;
 
                 .tattoo-card-container {
                     .tattoo-card-list {
-                        flex: 0 0 20%;
+                        flex: 0 0 30%;
                         padding: 1em;
                     }
                 }
