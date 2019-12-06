@@ -4,7 +4,6 @@
   
 
     <ion-content>
-
         <div class="main animated fadeIn">
           <section class="header">
             <div class="user-header">
@@ -16,6 +15,7 @@
                       <li><a>Explore</a></li>
                       <li><a>Contact Us</a></li>
                       <li (click)="Login()" ><a>Sign In</a></li>
+                      <li (click)="logOut()" ><a>Sign Out</a></li>
                       <button class="btn-create-account riffle" (click)="CreateAccount()">Create Account</button>
                       <ion-button class="btn-close" (click)="addClasseAnimate()" color="light" fill="clear">
                         <ion-icon name="close"></ion-icon>
