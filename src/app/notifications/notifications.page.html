@@ -1,17 +1,12 @@
-<ion-header translucent no-border>
-    <ion-toolbar>
-      
-      <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Notifications</ion-title>
-      <ion-buttons slot="end" (click)="dismiss()">
-        <ion-button fill="icon-only">
-          <ion-icon name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-<ion-content padding>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<!-- 
+<ion-content>
+
+
   <ion-list >
     <ion-item *ngFor="let data of array; let i = index" >
       <h2>Price :{{data.price}}</h2><br />
@@ -20,34 +15,6 @@
     <button (click)="Accept(data, i)">Accept</button>
     <button (click)="Decline(data, i)">Decline</button>
     </ion-item>
-  </ion-list> -->
-
-  <main class="main"></main>
-  <div class="container">
-   <!--   <div class="no-messages"  *ngIf="array.length == 0">
-      <p>You have no messages yet!</p>
-    </div>  -->
-
- <div class="cards" *ngIf="array">
- 
-   <div class="card" *ngFor="let data of array; let i = index">
-      <div class="profile">
-          <img src="../../assets/kaizen-nguy-n-s9imzeGXKQ0-unsplash.jpg" alt="">
-        </div>
-        <div class="info-to-card">
-          <h4>{{data.price}}</h4>
-          <p>{{data.startingDate | date: 'dd/MM/yyyy'}}</p>
-        </div>
-        <div class="btn-request" >
-            <p>View</p>
-            <button (click)="Accept(data, i)" ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
-          </div>
-          
-   </div>
-   
-     
-    </div>
-  
-  </div>
+  </ion-list>
 
 </ion-content>
