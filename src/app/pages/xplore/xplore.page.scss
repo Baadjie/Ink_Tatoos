@@ -1,5 +1,6 @@
-*, *::after, *::before {
-    margin: 0;
+// #efefff#f5f5ff#eaedff
+*, *::before, *::after {
+    box-sizing: border-box;
     padding: 0;
 }
 /* width */
@@ -29,16 +30,48 @@
   }
 
 .main {
+    display: flex;
     height: 100%;
     width: 100%;
-    background: #f5f5ff;
-    margin: 0;
-    padding: 0;
+    -moz-transition: all 2s;
+    -webkit-transition: all 2s;
+    -o-transition: all 2s;
+    transition: all 2s;
+    
+}
+  .aside-container {
+    padding: .5em;
+    height: 100%;
+    background: #D66E53;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.notifation {
+    position: relative;
+}
+.badge {
+    position: absolute;
+    top: 12%;
+    right: 12%;
+    padding: .2em;
+    border-radius: 50%;
+    color: #686868;
+}
+.content-container {
+    flex: 1;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.profile {
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.027), 0 3px 6px rgba(0, 0, 0, 0.11);
+    overflow: hidden;
     
-    .header {
-        flex-basis: 40%;
+    img {
         width: 100%;
         background: linear-gradient((45deg,rgba(0,0,0,0.5)50%, (rgba(0,0,0,0) 50%))), url('../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg');
         background-position: top;
@@ -674,13 +707,190 @@
 .show {
     opacity: 1;
 }
+.tattoo-booking-image {
+    flex-basis: 40%;
+    background: rgb(97, 97, 97);
+    border-radius: 6px;
+    overflow: hidden;
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+.info-booking {
+    padding: .5em;
+    flex: 1;
+    h4, p {
+        margin: 0 !important;
+        color: #686868;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h4 {
+        font-size: 2vh;
+        padding-bottom: .5em;
+    }
+    p {
+        font-size: 1.5vh;
+        
+    }
+}
+.call-booking {
+    position: absolute;
+    right: -2.5vh;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fab-btn {
+    width: 4vh;
+    height: 4vh;
+}
+.analytics-container {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+}
+.graghs {
+    flex: 1;
+}
+/* header filtered */
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    .user-header {
+    .modal {
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      background: rgba(85, 85, 85, 0.5); 
+      background-color: rgba(255, 255, 255, 0.5);  
     }
-
+    .warning {
+      display: none;
+    }
+  }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .main {
+        flex-direction: column;
+    }
+    .aside-container {
+        flex-basis: 10%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .profile {
+        height: 8vh;
+        width: 8vh;
+    }
+    
+    .paragragh {
+        justify-self: flex-start;
+        margin-left: 2%;
+    }
+    .scroll-container {
+        flex-basis: 25%;
+    }
+   
+    .header {
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .first-header {
+        font-size: 3vh;
+    }
+    .analytics-container {
+        flex-basis: 80%;
+    }
+    
+    .add-tattoo, .default {
+        flex: 0 0 55%;
+    }
+    .profile-container {
+        align-items: center;
+    }
+    .sub-container {
+        flex-direction: column-reverse;
+        height: 70%;
+    }
+    .booking-item {
+        flex-basis: 100%;
+        height: 100px;
+        filter: saturate(0%);
+        transform: skew(0deg);
+      }
+      .booking-item:active {
+        filter: saturate(20%);
+        transform: skew(10deg);
+      }
+    
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .main {
+        flex-direction: column;
+    }
+    .aside-container {
+        flex-basis: 10%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .add-tattoo, .default{
+        flex: 0 0 40%;
+    }
+    .header {
+        margin-left: 1%;
+        align-items: center;  
+      }
+      .profile-container {
+          align-items: center;
+      }
+     
+    
+  
+  
+}
+@media only screen and (min-width: 768px) {
+    .main {
+        flex-direction: row;
+    }
+    .aside-container {
+        flex-basis: 10%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .add-tattoo, .default {
+       flex: 0 0 40%;
+    }
+    .header {
+        margin-left: 1%;
+        align-items: center;  
+      }
+      .paragragh {
+          padding: 1em;
+      }
+      .profile-container {
+          flex-direction: column;
+      }
+      .booking-item {
+        flex-basis: 100%;
+      }
+     
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .main {
+        flex-direction: row;
+    }
+    .aside-container {
+        flex-basis: 10%;
+    }
+    .add-tattoo, .default {
+        flex: 0 0 40%;
+    }
+  .booking-item {
+    flex-basis: 100%;
+    height: 150px;
   }
 
   @media only screen and (min-width: 600px) {
@@ -694,4 +904,5 @@
 }
 @media only screen and (min-width: 1024px) {
       
+}
 }
