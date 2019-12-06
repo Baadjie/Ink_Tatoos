@@ -39,31 +39,11 @@
             </div>
             <div class="information">
       
-                <div class="popOver animated" [ngClass]="{'fadeIn':popoverState, 'fadeOut':!popoverState}" id="popUp">
-                    <div class="close">
-                      <ion-button fill="clear" color="danger" size="small" (click)="animate()">
-                        <ion-icon name="close"></ion-icon>
-                      </ion-button>
-                    </div>
-                    <div class="popover-header">
-                      <p style="font-weight: bold;"><small>My Notifications</small></p>
-                    </div>
-                    <div class="cardList-container">
-                      <div class="cardItems">
-                        <div class="cardItem">
-                          <div class="profile-image">
-      
-                          </div>
-                          <div class="informations">
-                            <p>Name</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-      
+               
+                <img src="../../../assets/icon/INK.svg" class="ink animated slideInDown" alt="">
       
                 <div class="info-header-palet">
+                  <img src="../../../assets/anotherLogo.svg" class="logo-header animated jello" alt="">
                   <p style="color: #fff;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam deleniti molestias perspiciatis iure obcaecati veritatis hic sunt ratione harum? Quis, non. Iusto sapiente corrupti error inventore sint praesentium in. Fugit?</p>
                 </div>
             </div>
@@ -97,7 +77,7 @@
             </div>  -->
             <div class="tattoo">
               <div class="header-tattoo">
-                <p>Design Tattoos</p>
+                <p class="design">Design Tattoos</p>
       
               </div>
               <div class="tattoo-card-container">
@@ -121,11 +101,11 @@
             </div> 
             <div class="tattoo">
               <div class="header-tattoo">
-                <p>Previous Tattoos</p>
+                <p class="design">Previous Tattoos</p>
               </div>
               <div class="tattoo-card-container">
                   <div class="tattoo-card-list" *ngFor="let tattoo of PreviouseWork">
-                    <div class="tattoo-cards">
+                    <div class="tattoo-cards previous-work">
                       <img src="{{tattoo.image}}" alt="">
                       <div class="info-tattoo">
                         <article>

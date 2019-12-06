@@ -188,94 +188,50 @@
 
         }
         .information {
-            flex-basis: 85%;
             position: relative;
-            width: 100%;
-            z-index: -1;
+            padding: 1em;
+            flex-basis: 85%;
 
-            .popOver {
-                bottom: -20%;
-                min-width: 20%;
-                max-width: 20%;
-                background: #fff;
-                right: 3em;
-                top: 0%;
-                position: absolute;
-                border-radius: 5px;
-                z-index: 100000;
-                padding: 1em;
-                display: none;
-                filter: drop-shadow(0px 0px 3px rgba(0,0,0,.5));
-                &::after {
-                    content:'';
-                    height: 0;
-                    width: 0;
-                    border-width: 1em 1em 1em 0;
-                    border-style: solid;
-                    border-color: rgba(255,255,255,0) rgba(255,255,255,0)  rgb(255, 255, 255, 1) rgba(255, 255, 255, 0);
-                    position: absolute;
-                    transform: rotateY(180deg);
-                    top: -7%;
-                    right: 0%;
-                    
-                }
+           .ink {
+               position: absolute;
+               top: 0;
+               left: 0;
+               height: 100%;
+               width: 30%;
+              
+           }
+           .info-header-palet {
+               //border: 1px solid red;
+               display: flex;
+               position: relative;
+               z-index: 1;
+               justify-content: space-evenly;
+               align-items: flex-start;
+               flex-direction: column;
+                height: 100%;
+                width: 100%;
 
-                
-
-                .close {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-
-                }
-                .popover-header {
-                   border-bottom: 1px solid #ddd;
-                }
-                .cardList-container {
-                    height: 100%;
-                    width: 100%;
-                    /* padding: 1em; */
-                    display: flex;
-                    flex-direction: column;
-
-
-                    .cardItems {
-                        flex: 0 0 30%;
-                       /*  min-height: 30%; */
-                        /* max-height: 50%; */
-                      /*   background: blue; */
-                        padding: 1em;
-
-                        .cardItem {
-                            height: 100%;
-                            width: 100%;
-                            background: red;
-                            display: flex;
-
-                            .profile-image {
-                                height: 100%;
-                                flex-basis: 40%;
-                                background: blue;
-
-                            }
-                        }
-                    }
-                }
-            }  
-
-            @media only screen and (max-width: 600px) {
-                .popOver {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    min-width: 100%;
-                    max-width: 100%;
-                    height: 100%;
-                    min-height: 100%;
-                    z-index: 100000;
-
-                }
+            .logo-header {
+                flex-basis: 30%;
+                height: 30%;
             }
+            p {
+                width: 40%;
+            }
+
+           
+
+           }
+           @media only screen and(max-width: 600px){
+            .info-header-palet p {
+             width: 100%;
+            }
+            .info-header-palet {
+                justify-content: flex-start;
+                align-items: flex-start;
+                z-index: 1;
+            }
+         }
         }             
           
          
@@ -396,6 +352,7 @@
                 width: 100%;
                 flex-basis: 95%;
                 display: flex;
+        
                 flex-wrap: nowrap;
                 flex-direction: row;
                 overflow-x: scroll;
@@ -408,7 +365,7 @@
                         width: 100%;
                         position: relative;
                         border-radius: 6px;
-                        box-shadow: 0 0 3px #000;
+                        box-shadow: 0 0 3px 0 rgb(221, 221, 221);
                         overflow: hidden;
                         .booking {
                             position: absolute;
@@ -422,6 +379,7 @@
                             .btn-book {
                                 width: 100%;
                                 --background: #db6c50be; 
+                                display: none;
                             }
                            
                         }
@@ -444,6 +402,7 @@
                                 -webkit-box-orient: vertical;
                                 -webkit-line-clamp: 2;
                                 overflow: hidden;
+                                display: none;
                             
                             }
                         }
@@ -460,6 +419,8 @@
                             object-fit: cover;
                         }
                     }
+
+                    
                    
                 }
 
@@ -473,6 +434,10 @@
        
     }
 
+    .previous-work:hover .booking .btn-book{
+            display: block;
+       
+    }
     @media only screen and (max-width : 600px) {
         .tattoo-container {
             width: 100%;
@@ -558,11 +523,11 @@
             width: 100%;
 
             .tattoo {
-                flex: 0 0 80%;
+                flex: 0 0 50%;
 
                 .tattoo-card-container {
                     .tattoo-card-list {
-                        flex: 0 0 30%;
+                        flex: 0 0 20%;
                         padding: 1em;
                     }
                 }
