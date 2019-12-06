@@ -17,13 +17,13 @@
                 </ion-button>
             </div>
               
-              <div class="profile"  *ngIf="!showProfile1">
+              <div class="profile"  *ngIf="showProfile1">
                 <p class="profile-name">Khuthy Muenda</p>
                 <div class="image-profile">
                     <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
                 </div>
               </div>
-              <div class="notifation" *ngIf="!showProfile1">
+              <div class="notifation" *ngIf="showProfile1">
                   <ion-button (click)="viewNotifications()" color="light" fill="clear" size="large">
                       <ion-icon name="notifications-outline"></ion-icon>
                     </ion-button>

@@ -5,7 +5,7 @@ import { RegisterPage } from './../../register/register.page';
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
-import * as anime from 'animejs';
+
 
 @Component({
   selector: 'app-xplore',
@@ -55,7 +55,7 @@ tattoo = {
   PreviouseWork = [];
   porpular = []
 
-  showProfile1 : boolean = false;
+  showProfile1 : boolean;
  
 
 
@@ -67,9 +67,14 @@ tattoo = {
    }
 
   
-   
+   ionViewCanEnter(){
+    
+   }
 
   ngOnInit() {
+
+    
+    
 
     
     this.db.collection("Tattoo").onSnapshot(data => {
