@@ -6,7 +6,8 @@ import * as firebase from 'firebase';
 })
 export class DeliverDataService {
 
-  showProfile : boolean = false;
+
+  notifications : number = 0;
 
   logout :boolean =false;
 
@@ -27,5 +28,9 @@ export class DeliverDataService {
     name : ""
   }
 
-  constructor() { }
+  AcceptedData =  [];
+
+  constructor() {
+    this.notifications = this.AcceptedData.length;
+   }
 }
