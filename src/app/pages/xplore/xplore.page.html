@@ -10,9 +10,11 @@
 
       <button (click)="CreateAccount()">Create Account</button>
       <br />
-      <button (click)="logOut()">Logout</button>
+      <button (click)="logOut()" *ngIf="buttonClicked">Logout</button>
       <br />
-      <button (click)="Login()">SignIn</button>
+      <button (click)="Login()"   >SignIn</button>
+      <br />
+      <button (click)="profile()"  *ngIf = "showProfile"  >Show Profile</button>
     
      </aside>
      <section class="content-container">
@@ -20,7 +22,7 @@
          <h1 class="first-header"> Xplore Page</h1>
 
 
-         <h2 *ngIf = "showProfile1">Show Profile</h2>
+         <!-- <h2 *ngIf = "showProfile1">Show Profile</h2> -->
 
 
        </header>
@@ -140,7 +142,7 @@
        </div> -->
 
 
-       <ion-button (click)="logout()"> logout</ion-button>
+  
      </section>
   </main>
  </ion-content>

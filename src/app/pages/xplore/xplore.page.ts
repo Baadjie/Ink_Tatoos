@@ -5,7 +5,7 @@ import { RegisterPage } from './../../register/register.page';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 
 
@@ -21,7 +21,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 export class XplorePage implements OnInit {
 
 
-
+  public buttonClicked: boolean = false; 
 
   tattoo = {
     name: '',
@@ -47,17 +47,50 @@ export class XplorePage implements OnInit {
   PreviouseWork = [];
   porpular = []
 
-  showProfile1 : boolean = false;
+  loader = true;
 
-  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController) {
+ showProfile : boolean = false;
+
+  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController,private rout:Router) {
+
+
+    // this.buttonClicked = !this.buttonClicked;
+
+     this.showProfile=!this.showProfile;
+
+    
+   
+
 
    }
 
   
-   
+   logout(){
+    this.loader = true;
+    this.DeliverDataService.logoutUser().then(()=>{
+      //this.rout.navigateByUrl('login');
+      setTimeout(() => {
+        this.loader = false;
+      }, 4000);
+    })
+    }
  
 
+    profile(){
+      this.rout.navigateByUrl('/profile')
+
+    }
+
   ngOnInit() {
+
+
+    
+
+  
+
+
+ 
+
     
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
@@ -111,9 +144,20 @@ async CreateAccount(){
 
 async Login(){
 
+  
+  //this.buttonClicked = !this.buttonClicked
+
+ 
+  this.buttonClicked= this.DeliverDataService.logout
+
   let modal = await this.modalController.create({
     component : SignInPage
+
+    
   })
+
+
+
   return await modal.present();
 
 }
@@ -122,6 +166,7 @@ logOut(){
 
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
+    
   }).catch(error => {
     console.log("Something went wrong");
     
@@ -147,6 +192,9 @@ logOut(){
       this.DeliverDataService.dataSaved.image = tattoo.image;
       this.DeliverDataService.dataSaved.name = tattoo.name;
       this.DeliverDataService.dataSaved.priceRange = tattoo.pricerange;
+
+
+   
 
       console.log("Your data in the service",  this.DeliverDataService.dataSaved);
 

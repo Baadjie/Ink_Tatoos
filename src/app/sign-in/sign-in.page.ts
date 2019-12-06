@@ -13,24 +13,60 @@ export class SignInPage implements OnInit {
 
   email = "";
   password = "";
+  showProfile: boolean;
 
   constructor(public modalController : ModalController) { }
 
   ngOnInit() {
   }
 
-  login(){
-   firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-
-    this.modalController.dismiss({
-      'dismissed': true
-    });
-
-   }).catch(error => {
-    this.modalController.dismiss({
-      'dismissed': true
-    });
-   })
+  ionViewWillEnter(){
+    
   }
 
+  login(){
+
+
+    //
+
+    const {email,password}=this
+    firebase.auth().signInWithEmailAndPassword(email, password).then((result) => {
+
+      console.log("Logged in succesful")
+      
+
+         this.modalController.dismiss({
+  
+           'dismissed': true
+
+    
+         }).catch((error) => {
+    console.log("User not found")
+     let errorCode = error.code;
+     let errorMessage = error.message;
+ 
+    });
+
+
+
+
+    //
+
+
+
+  //  firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
+
+  //   this.modalController.dismiss({
+  
+  //     'dismissed': true
+  //   });
+
+  //  }).catch(error => {
+  //   this.modalController.dismiss({
+  //     'dismissed': true
+  //   });
+  //  })
+  // })
 }
+    );
+}}
