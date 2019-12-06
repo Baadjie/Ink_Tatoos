@@ -23,6 +23,11 @@
     background: #555;
   }
 
+  .btn-close,
+  .btn-menu {
+      display: none;
+  }
+
 .main {
     height: 100%;
     width: 100%;
@@ -339,6 +344,10 @@
                 }
               
             }
+            .btn-close,
+            .btn-menu {
+                display: block;
+            }
             /* .information {
                 .logo {
                     height: 100%;
@@ -461,9 +470,10 @@
     @media only screen and (max-width : 600px) {
         .tattoo-container {
             width: 100%;
+            flex: 0 0 80%;
 
             .tattoo {
-                flex: 0 0 80%;
+                flex: 0 0 50%;
           
 
                 .tattoo-card-container {
@@ -714,6 +724,3 @@
 @media only screen and (min-width: 1024px) {
       
 }
-
-
-  

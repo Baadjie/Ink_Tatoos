@@ -3,7 +3,7 @@ import { SignInPage } from './../../sign-in/sign-in.page';
 import { BookingModalPage } from './../../booking-modal/booking-modal.page';
 import { DeliverDataService } from './../../deliver-data.service';
 import { RegisterPage } from './../../register/register.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
 
@@ -61,7 +61,7 @@ tattoo = {
 
   showProfile1 : boolean = true;
 
-  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController) {
+  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
    
@@ -340,20 +340,20 @@ logOut(){
   //   }
   // }
 
-  // addClasseAnimate() {
-  //   this.menu = !this.menu
-  //   if (this.menu) {
+  addClasseAnimate() {
+    this.menu = !this.menu
+    if (this.menu) {
      
-  //      this.render.setStyle(this.menuDiv[0],'display','flex'); 
-  //     this.render.addClass(this.menuDiv[0],'dropped');
-  //   } else {
-  //     setTimeout(() => {
-  //      this.render.setStyle(this.menuDiv[0],'display','none');
-  //      this.render.removeClass(this.menuDiv[0],'dropped');
+       this.render.setStyle(this.menuDiv[0],'display','flex'); 
+      this.render.addClass(this.menuDiv[0],'dropped');
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.menuDiv[0],'display','none');
+       this.render.removeClass(this.menuDiv[0],'dropped');
        
-  //     }, 500);
-  //   }
-  // }
+      }, 500);
+    }
+  }
 
 
   pb(){

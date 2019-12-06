@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { DeliverDataService } from './../deliver-data.service';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
@@ -13,7 +14,7 @@ export class NotificationsPage implements OnInit {
   db = firebase.firestore();
   array = [];
 
-  constructor(public DeliverDataService : DeliverDataService ) {
+  constructor(public DeliverDataService : DeliverDataService, private modalController: ModalController ) {
     this.array = [];
     this.array = this.DeliverDataService.AcceptedData;
     console.log("Data in the Notifications ", this.array);
@@ -112,6 +113,11 @@ export class NotificationsPage implements OnInit {
 
     })
     
+  }
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
 
   Accept(data, i){
