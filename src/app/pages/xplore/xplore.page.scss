@@ -471,8 +471,13 @@
                             /* display: none; */
 
                             article {
-                                padding: .5em;
+                                /* padding: .5em; */
                                 color: #fff;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                overflow: hidden;
+                            
                             }
                         }
 
