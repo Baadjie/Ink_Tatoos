@@ -13,6 +13,8 @@ export class NotificationsPage implements OnInit {
 
   db = firebase.firestore();
   array = [];
+  showMessage : boolean;
+  message = "";
 
   constructor(public DeliverDataService : DeliverDataService, private modalController: ModalController ) {
     this.array = [];
@@ -121,9 +123,19 @@ export class NotificationsPage implements OnInit {
   }
 
   Accept(data, i){
+
     console.log("a", data.uid);
+    this.showMessage = true;
+    this.message = "Accept";
+   
+
+    setTimeout(() => {
+      console.log("ACCEPTED DATA");
+      this.array.splice(i, 1);
+     
+    },2000);
     
-    this.array.splice(i, 1);
+   
 
     let obj = {
       startingDate : "",

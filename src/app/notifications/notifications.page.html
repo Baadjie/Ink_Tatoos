@@ -17,6 +17,7 @@
       <h2>Price :{{data.price}}</h2><br />
     <h2>Starting Date : {{data.startingDate | date: 'dd/MM/yyyy'}}</h2><br />
     <h2>Ending Date: {{data.endingDate | date: 'dd/MM/yyyy'}}</h2><br />
+    <!-- <p *ngIf = "showMessage">{{message}}</p> -->
     <button (click)="Accept(data, i)">Accept</button>
     <button (click)="Decline(data, i)">Decline</button>
     </ion-item>
