@@ -1,10 +1,5 @@
 <ion-content>
 
-
-  
-
-    <ion-content>
-
         <div class="main animated fadeIn">
           <section class="header">
             <div class="user-header">
@@ -113,11 +108,11 @@
                         <article>
                           <h4 style="white-space: normal; font-size: 2.8vh;">{{tattoo.name}}</h4>
                           <p style="color: rgb(48, 167, 48); font-weight: bold; ; font-size: 2.7vh;">{{tattoo.pricerange}}</p>
-                          <p style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>   
+                          <p class="description" style="white-space: normal; ; font-size: 2.5vh;">{{tattoo.description}} </p>   
                         </article>
                       </div> 
                       <div class="booking">
-                        <ion-button  size="block" class="btn-book" (click)="Booking(tattoo)">Book</ion-button>
+                        <ion-button class="btn-book" (click)="Booking(tattoo)">Book</ion-button>
                       </div>
                     </div>
                   </div>
