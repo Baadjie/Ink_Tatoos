@@ -2,25 +2,16 @@ import { SignInPage } from './../../sign-in/sign-in.page';
 import { BookingModalPage } from './../../booking-modal/booking-modal.page';
 import { DeliverDataService } from './../../deliver-data.service';
 import { RegisterPage } from './../../register/register.page';
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
-// import * as anime from 'animejs';
-
 @Component({
   selector: 'app-xplore',
   templateUrl: './xplore.page.html',
   styleUrls: ['./xplore.page.scss'],
 })
-
-
 export class XplorePage implements OnInit {
-
-
-/* Animations */
-popoverState = false;
-popoverDiv = document.getElementsByClassName('popOver');
-
+  public buttonClicked: boolean = false; 
   tattoo = {
     name: '',
     pricerange: '',
@@ -35,31 +26,18 @@ popoverDiv = document.getElementsByClassName('popOver');
   MyValue1: boolean;
   num: number;
   docId: string;
-
   query: any[];
-
   Design = [];
-
-
   Sketch = [];
   PreviouseWork = [];
   porpular = []
-
   showProfile1 : boolean = false;
-
-
-
-  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController, private element: ElementRef, public render: Renderer2) {
- 
-    
-      
+  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController) {
    }
-
   
    
-
+ 
   ngOnInit() {
-
     
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
@@ -72,8 +50,6 @@ popoverDiv = document.getElementsByClassName('popOver');
         }
       })
     })
-
-
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
@@ -85,8 +61,6 @@ popoverDiv = document.getElementsByClassName('popOver');
         }
       })
     })
-
-
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
@@ -100,28 +74,23 @@ popoverDiv = document.getElementsByClassName('popOver');
     })
             
 }
-
 async CreateAccount(){
-
   let modal = await this.modalController.create({
     component : RegisterPage
   })
   return await modal.present();
-
 }
-
-
 async Login(){
-
   let modal = await this.modalController.create({
     component : SignInPage
+    
   })
+ //this.buttonClicked = !this.buttonClicked;
+    
+  //this.showProfile1=!this.showProfile1;
   return await modal.present();
-
 }
-
 logOut(){
-
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
   }).catch(error => {
@@ -129,11 +98,8 @@ logOut(){
     
   })
 }
-
  async Booking(tattoo){
-
     if(firebase.auth().currentUser){
-
       console.log("Your data ", tattoo);
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
@@ -143,23 +109,18 @@ logOut(){
       //   legnth : "153",
       //   breadth : "353"
       // })
-
       this.DeliverDataService.dataSaved.category = tattoo.categories;
       this.DeliverDataService.dataSaved.description = tattoo.description;
       this.DeliverDataService.dataSaved.image = tattoo.image;
       this.DeliverDataService.dataSaved.name = tattoo.name;
       this.DeliverDataService.dataSaved.priceRange = tattoo.pricerange;
-
+   
       console.log("Your data in the service",  this.DeliverDataService.dataSaved);
-
       const modal = await this.modalController.create({
         component: BookingModalPage
       });
       return await  modal.present();
-
-
     }else{
-
       console.log("Sorry no user here");
       const modal = await this.modalController.create({
         component: RegisterPage
@@ -168,33 +129,13 @@ logOut(){
       
     }
     
-
    
   
     
   }
-  viewNotifications() {
-   this.popoverState = !this.popoverState
-   if (this.popoverState) {
-     this.render.setStyle(this.popoverDiv[0],'display','block');
-   } else {
-     setTimeout(() => {
-      this.render.setStyle(this.popoverDiv[0],'display','none');
-     }, 500);
-   }
-   
-    
-  }
-
-
   pb(){
-
-
   }
-
   obj = {id: null, obj : null}
-
-
   ionViewWillEnter(){
     
     let firetattoo = {
@@ -202,8 +143,28 @@ logOut(){
       doc: {}
     }
    
-   
-
+  
+    // this.db.collection('Tattoo').onSnapshot(data => {
+    //   this.Tattoos = [];
+    
+    //   data.forEach(item => {
+    //     firetattoo.doc = item.data();
+    //     firetattoo.docid = item.id;
+    //     this.Tattoos.push(firetattoo)
+      
+    //      firetattoo = {
+    //       docid: '',
+    //       doc: {}
+    //     }
+    //   })
+    //   console.log("Your tattoos ",  this.Tattoos );
+      
+      
+    // })
   }
-
 }
+
+
+
+
+
