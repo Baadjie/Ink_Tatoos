@@ -6,7 +6,7 @@ import { RegisterPage } from './../../register/register.page';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-xplore',
@@ -55,7 +55,7 @@ tattoo = {
 
   showProfile1 : boolean = true;
 
-  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2) {
+  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
    
@@ -119,6 +119,11 @@ tattoo = {
     })
    }
  
+
+    profile(){
+      this.rout.navigateByUrl('/profile')
+
+    }
 
   ngOnInit() {
 
@@ -196,7 +201,7 @@ async Login(){
 logOut(){
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
-    this.showProfile();
+
   }).catch(error => {
     console.log("Something went wrong");
     
@@ -222,7 +227,10 @@ logOut(){
       this.DeliverDataService.dataSaved.image = tattoo.image;
       this.DeliverDataService.dataSaved.name = tattoo.name;
       this.DeliverDataService.dataSaved.priceRange = tattoo.pricerange;
+
+
    
+
       console.log("Your data in the service",  this.DeliverDataService.dataSaved);
       const modal = await this.modalController.create({
         component: BookingModalPage

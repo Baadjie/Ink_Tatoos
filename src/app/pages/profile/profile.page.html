@@ -1,0 +1,99 @@
+
+
+<ion-content padding>
+
+   
+<!-- 
+  name: <input type="text" [(ngModel)]="name" placeholder="{{name}}"><br />
+  phoneNumber: <input type="text" [(ngModel)]="phoneNumber" placeholder="{{phoneNumber}}"><br />
+  email: <input type="text" [(ngModel)]="email" placeholder="{{email}}"><br />
+  <button (click)="goToEditPage()">Edit</button>  -->
+
+
+          
+
+
+                  <section class="content-container"> 
+                    <header class="header" *ngFor="let user of User">
+                        <h1 class="first-header">wellcome  {{ user.name}}</h1>
+                     
+                      </header>
+
+                      <ion-button color="secondary" (click)="logout()">
+                          <ion-icon name="log-out"></ion-icon> Logout
+                        </ion-button>
+                      <div class="sub-container">
+                        <div class="top-profile">
+                           <div class="profiles-info">
+                               <div   class="profile" style="height: 20vh; width: 20vh;">
+                                
+                                 </div>
+                                 <article *ngFor="let user of User">
+                                  <h4>Name : {{ user.name}}</h4>
+                                  <p>{{ user.email}}</p>
+                                  
+                                  </article>
+                                
+                               </div>
+                  
+                          
+                        </div>
+                       
+                     
+                        </div>
+                    </section>
+
+                    <br>
+                    <br>
+
+
+                    <section class="content-container"> 
+                      <header class="header" >
+                          <h1 class="first-header">Recent Bookings</h1>
+                    
+                        </header>
+                        <div class="sub-container">
+                        
+                                   </div>
+                                   <article *ngFor="let request of Requests">
+                                    <!-- <h4>Status : {{ request.bookingState}}</h4> -->
+
+                                  
+                                    <!-- <img src="{{request.image}}" class="tattoo-image" alt=""> -->
+                                     <p>TattoName: {{ request.tattoName}}</p>
+                                    <p>Category :{{ request.category}}</p>
+                                    <p>Breadth: {{ request.breadth}}</p>
+                                    <p>Length :{{ request.length}}</p>
+                                    <p>Description: {{ request.description}}</p>
+
+                                    <br>
+                               
+                                    
+                                    
+                                    </article>
+                                  
+                           
+                      </section>
+
+
+
+                      <!-- <section class="content-container"> 
+                        <header class="header" >
+                            <h1 class="first-header">booking </h1>
+                      
+                          </header>
+                          <div class="sub-container">
+                          
+                                     </div>
+                                     <article *ngFor="let admin of Response">
+                                      <h4>Start Date : {{ admin.bookingState}}</h4>
+                                      <p>Price: {{ admin.price}}</p>
+                                      <p>End Date :{{ admin.endingDate}}</p>
+                                      
+                                      </article>
+                                    
+                             
+                        </section> -->
+              
+         
+</ion-content>
