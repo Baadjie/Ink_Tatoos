@@ -39,7 +39,7 @@
 
     <section class="form-container">
      
-            
+     
             <ion-list>
                     
                    <ion-item>                      
@@ -54,59 +54,44 @@
                           <p>Category : {{category}}</p>
                       </ion-item>
 
+                      <form [formGroup]="tattooForm">
                       <ion-item>
                           <ion-label position="floating">Length in cm</ion-label>
-                          <ion-input type="number" [(ngModel)]="Length"></ion-input>
+                          <ion-input type="number" formControlName="Length" [(ngModel)]="Length"></ion-input>
                         </ion-item>
-
+                        <div class="error" *ngFor="let validate of validation_messages.Length">
+                          <div class="messages" *ngIf="tattooForm.get('Length').hasError(validate.type) && (tattooForm.get('Length').dirty || tattooForm.get('Length').touched)">
+                            {{validate.message}}
+                        </div> 
+                      </div>
+                      
                         <ion-item>
                             <ion-label position="floating">Breadth in cm</ion-label>
-                            <ion-input type="number" [(ngModel)]="Breadth" ></ion-input>
+                            <ion-input type="number" formControlName="Breadth" [(ngModel)]="Breadth" ></ion-input>
                           </ion-item>
-
+                          <div class="error" *ngFor="let validate of validation_messages.Breadth">
+                            <div class="messages" *ngIf="tattooForm.get('Breadth').hasError(validate.type) && (tattooForm.get('Breadth').dirty || tattooForm.get('Breadth').touched)">
+                              {{validate.message}}
+                          </div> 
+                        </div>
+                        
+                      
                           <ion-item>
                              <p>You will receive a contract, date and time at which you can come and have your tattoo done.</p>
                             </ion-item>
                       
                       
                        
-                </ion-list>
-            <ion-button  color="secondary" shape="block" (click)="senBookig()">Book</ion-button> 
-          
-           
+                
+            <ion-button  color="secondary" shape="block" (click)="senBookig(tattooForm)" [disabled]="!tattooForm.valid">Book</ion-button> 
+          </form>
 
 
-     
+        </ion-list>
     </section>
   </main>
-  
-  <!-- 
-  <ion-label>Tattooname</ion-label>
-  
-  <ion-input type="text"[(ngModel)]="tattoo.name" ></ion-input>
-  
- 
-
-
-  <ion-label>Pricerange</ion-label>
-  <ion-input type="number"   [(ngModel)]="tattoo.pricerange"  ></ion-input>
- 
-
-
-    <ion-label>Categories</ion-label>
-    <ion-select [(ngModel)]="tattoo.categories"  multiple="true">
-      <ion-select-option value="Previous work" >Previous work</ion-select-option>
-      <ion-select-option value="Sketch/design">Sketch/design</ion-select-option>
-    </ion-select>
-   
-
-
-    <ion-label>Description</ion-label>
-     <ion-input   type="text" [(ngModel)]="tattoo.description" ></ion-input>
-   
-
-     <button  (click)="addtattoo()" class="submit" ion-button full round>Add tatoo</button> 
-    -->
- 
 </ion-content>
+  
+    
+
 

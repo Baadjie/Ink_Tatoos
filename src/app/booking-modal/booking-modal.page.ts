@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
+import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 
 
@@ -16,8 +17,8 @@ import { SuccessPagePage } from '../success-page/success-page.page';
 export class BookingModalPage implements OnInit {
 
 
-    Length : number = 0;
-    Breadth : number = 0;
+    Length : number ;
+    Breadth : number;
 
 
 
@@ -29,20 +30,35 @@ export class BookingModalPage implements OnInit {
   
     Cname = "";
     db = firebase.firestore()
+    tattooForm : FormGroup;
+    validation_messages = {
+      'Length': [
+        { type: 'required', message: 'Length  is required.' },
+  
+      ],
+      'Breadth': [
+        { type: 'required', message: 'Breadth  is required.' },
+  
+      ],
+    }
+        
 
-
-
-  constructor(public DeliverDataService: DeliverDataService, private modalController: ModalController) { }
-
+  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController) { 
+  this.tattooForm = this.fb.group({
+    Length: new FormControl('', Validators.compose([Validators.required])),
+    Breadth: new FormControl('', Validators.compose([Validators.required])),
+  })
+}
   ngOnInit() {
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
     })
 
-   
-
   }
+  
+
+  
 
   ionViewWillEnter(){
     
@@ -59,6 +75,7 @@ export class BookingModalPage implements OnInit {
 
   senBookig(){
  
+    if (this.tattooForm.valid ) {
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
 
             
@@ -88,7 +105,7 @@ export class BookingModalPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
-    
+  }
   }
 
   dismiss() {
