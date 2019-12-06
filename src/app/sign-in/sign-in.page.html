@@ -1,27 +1,49 @@
-<ion-header>
+<ion-header translucent no-border>
   <ion-toolbar>
-    <ion-title>SignIn</ion-title>
+      <ion-buttons slot="start">
+          <ion-button fill="icon-only">
+            <ion-icon name="log-in"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Sign In</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-button fill="icon-only">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content fullscreen>
 
-<ion-content>
+ <main class="main">
+    <section class="upload-tattoo">
 
-  <ion-list >
+    </section>
+    <section class="form-container">
+        <ion-list >
+            <div class="logo">
+                <img src="../../assets/icon/Group 17.svg" alt="" width="150px">
+              </div>
+            <ion-item>
+                             
+                <ion-input type="text"  [(ngModel)]="email" placeholder="Enter your email"></ion-input>
+              </ion-item>
+      
+              <ion-item>
+                             
+                  <ion-input type="password" [(ngModel)]="password" placeholder="Enter your password"></ion-input>
+                </ion-item>
+      
+         
+      
+            <br />
+            <ion-button shape="block" color="secondary" (click)="login()">Sign In</ion-button>
+            <div class="signUp">
+                <p>Already have an Account? </p><ion-button  fill="clear" size="small" (click)="CreateAccount()">Sign In</ion-button>
+             </div>
+        </ion-list>
+    </section>
+ </main>
 
-      <ion-item>
-                       
-          <ion-input type="text"  [(ngModel)]="email" placeholder="Enter your email"></ion-input>
-        </ion-item>
 
-        <ion-item>
-                       
-            <ion-input type="password" [(ngModel)]="password" placeholder="Enter your password"></ion-input>
-          </ion-item>
-
-   
-
-      <br />
-      <button (click)="login()">SignIn</button>
-
-  </ion-list>
 </ion-content>

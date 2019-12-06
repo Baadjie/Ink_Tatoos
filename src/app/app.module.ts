@@ -1,3 +1,4 @@
+import { NotificationsPageModule } from './notifications/notifications.module';
 import { SignInPageModule } from './sign-in/sign-in.module';
 import { SuccessPagePageModule } from './success-page/success-page.module';
 import { BookingModalPageModule } from './booking-modal/booking-modal.module';
@@ -17,10 +18,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 
 
+
 @NgModule({
   declarations: [AppComponent ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,BookingModalPageModule, RegisterPageModule, SuccessPagePageModule, SignInPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NotificationsPageModule, BookingModalPageModule, RegisterPageModule, SuccessPagePageModule, SignInPageModule],
   providers: [
     StatusBar,
     SplashScreen,

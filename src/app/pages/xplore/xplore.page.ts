@@ -1,18 +1,36 @@
+import { NotificationsPage } from './../../notifications/notifications.page';
 import { SignInPage } from './../../sign-in/sign-in.page';
 import { BookingModalPage } from './../../booking-modal/booking-modal.page';
 import { DeliverDataService } from './../../deliver-data.service';
 import { RegisterPage } from './../../register/register.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { ModalController, AlertController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-xplore',
   templateUrl: './xplore.page.html',
   styleUrls: ['./xplore.page.scss'],
 })
 export class XplorePage implements OnInit {
-  public buttonClicked: boolean = false; 
-  tattoo = {
+
+
+/* Animations */
+popoverState = false;
+popoverDiv = document.getElementsByClassName('popOver');
+
+datesState = false;
+dateIcon = 'ios-arrow-down';
+dateDiv = document.getElementsByClassName('dates');
+
+tattooInfo = false;
+tattooDiv = document.getElementsByClassName('info-tattoo');
+
+menu = false;
+menuDiv = document.getElementsByClassName('wraper-list');
+  
+tattoo = {
     name: '',
     pricerange: '',
     description: '',
@@ -31,13 +49,88 @@ export class XplorePage implements OnInit {
   Sketch = [];
   PreviouseWork = [];
   porpular = []
-  showProfile1 : boolean = false;
-  constructor(public DeliverDataService : DeliverDataService,  public modalController: ModalController, public alertCtrl: AlertController) {
-   }
-  
-   
+  respnses = []
+  AcceptedData = [];
  
+
+  showProfile1 : boolean = true;
+
+  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2) {
+
+    this.respnses = this.DeliverDataService.AcceptedData;
+   
+
+ 
+
+   }
+
+   async Notifications(){
+     console.log("ttttttttt", this.respnses);
+    let modal = await this.modalController.create({
+       component : NotificationsPage,
+       cssClass: 'modalNotification'
+     })
+     return await modal.present();
+   }
+
+   load(){
+
+    if(firebase.auth().currentUser){
+
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(i => {
+        i.forEach(a => {
+  
+         if(a.data().bookingState === "Accepted"){
+              
+          this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(myItem => {       
+            myItem.forEach(doc => {
+              if(doc.data().bookingState === "Pending"){
+                this.AcceptedData.push(doc.data())
+                console.log("@@@@@@@@@", this.AcceptedData);
+              }   
+            })
+        
+      })
+      
+         }
+        
+        })
+      })
+    }
+
+   }
+
+   ionViewWillEnter(){
+ 
+  
+    this.showProfile();
+
+
+
+  }
+
+  showProfile(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.showProfile1 = true;
+      }else {
+        this.showProfile1 = false;
+      }
+    })
+   }
+ 
+
   ngOnInit() {
+
+    this.showProfile();
+
+
+
+   
+
+    
+    
+
     
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
@@ -45,7 +138,7 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Sketch/design"){
             
            this.Sketch.push(item.data());
-           console.log("11111111111111111",this.Sketch);
+          //  console.log("11111111111111111",this.Sketch);
           }
         }
       })
@@ -56,7 +149,7 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Previous work"){
             
            this.PreviouseWork.push(item.data());
-           console.log("11111111111111111",this.PreviouseWork);
+         
           }
         }
       })
@@ -67,39 +160,54 @@ export class XplorePage implements OnInit {
           if(item.data().categories === "Sketch/design"){
             
            this.porpular.push(item.data());
-           console.log("11111111111111111",this.Sketch);
+       
           }
         }
       })
     })
             
 }
+
+
+
 async CreateAccount(){
   let modal = await this.modalController.create({
     component : RegisterPage
   })
+  this.showProfile();
   return await modal.present();
 }
 async Login(){
-  let modal = await this.modalController.create({
-    component : SignInPage
+
+ 
+ 
+
+    let modal = await this.modalController.create({
+      component : SignInPage,
+    })
     
-  })
- //this.buttonClicked = !this.buttonClicked;
-    
-  //this.showProfile1=!this.showProfile1;
-  return await modal.present();
+    this.showProfile();
+    return await modal.present();
+  
+
+
+
 }
 logOut(){
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
+    this.showProfile();
   }).catch(error => {
     console.log("Something went wrong");
     
   })
+
+ 
 }
  async Booking(tattoo){
     if(firebase.auth().currentUser){
+
+      this.showProfile1 = true;
       console.log("Your data ", tattoo);
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
@@ -133,35 +241,72 @@ logOut(){
   
     
   }
+
+  // viewNotifications() {
+    
+  //   this.animate(); 
+    
+  // }
+
+  // animate() {
+  //   this.popoverState = !this.popoverState
+  //   if (this.popoverState) {
+  //     this.render.setStyle(this.popoverDiv[0],'display','block');
+  //   } else {
+  //     setTimeout(() => {
+  //      this.render.setStyle(this.popoverDiv[0],'display','none');
+  //     }, 500);
+  //   }
+    
+  // }
+  // animateDates() {
+  //   this.datesState = !this.datesState
+  //   if (this.datesState) {
+  //     this.dateIcon = 'ios-arrow-up';
+  //     this.render.setStyle(this.dateDiv[0],'display','block');
+  //   } else {
+  //     setTimeout(() => {
+  //       this.dateIcon = 'ios-arrow-down';
+  //      this.render.setStyle(this.dateDiv[0],'display','none');
+  //     }, 500);
+  //   }
+    
+  // }
+  // tattooShowInfoAnimate(){
+  //   this.tattooInfo = !this.tattooInfo
+  //   if (this.tattooInfo) {
+     
+  //     this.render.setStyle(this.tattooDiv[0],'display','block');
+  //   } else {
+  //     setTimeout(() => {
+  //      this.render.setStyle(this.tattooDiv[0],'display','none');
+  //     }, 500);
+  //   }
+  // }
+
+  addClasseAnimate() {
+    this.menu = !this.menu
+    if (this.menu) {
+     
+       this.render.setStyle(this.menuDiv[0],'display','flex'); 
+      this.render.addClass(this.menuDiv[0],'dropped');
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.menuDiv[0],'display','none');
+       this.render.removeClass(this.menuDiv[0],'dropped');
+       
+      }, 500);
+    }
+  }
+
+
   pb(){
   }
   obj = {id: null, obj : null}
-  ionViewWillEnter(){
-    
-    let firetattoo = {
-      docid: '',
-      doc: {}
-    }
-   
-  
-    // this.db.collection('Tattoo').onSnapshot(data => {
-    //   this.Tattoos = [];
-    
-    //   data.forEach(item => {
-    //     firetattoo.doc = item.data();
-    //     firetattoo.docid = item.id;
-    //     this.Tattoos.push(firetattoo)
-      
-    //      firetattoo = {
-    //       docid: '',
-    //       doc: {}
-    //     }
-    //   })
-    //   console.log("Your tattoos ",  this.Tattoos );
-      
-      
-    // })
-  }
+
+
+
+
 }
 
 

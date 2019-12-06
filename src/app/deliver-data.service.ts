@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class DeliverDataService {
 
-  showProfile : boolean = false;
+
+  notifications : number = 0;
 
   dataSaved = {
     category : "",
@@ -15,5 +16,9 @@ export class DeliverDataService {
     name : ""
   }
 
-  constructor() { }
+  AcceptedData =  [];
+
+  constructor() {
+    this.notifications = this.AcceptedData.length;
+   }
 }

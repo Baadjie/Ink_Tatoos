@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header translucent no-border>
   <ion-toolbar>
     
     <ion-title text-center style="font-weight: bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Create Account</ion-title>
@@ -10,16 +10,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content fullscreen padding>
 
   <main class="main">
-      <!-- <div class="divitems">
-          <ion-item *ngIf="!tattoo.image" class="imageitem" lines="none" >
-           <ion-label position="stacked" id="profile_image" color="primary"></ion-label>
-           <ion-input class="image-upload"  type="file" formControlName="image" accept="image/*" (change)="changeListener($event)"></ion-input>
-         </ion-item>
-   <ion-item class="imageitem" lines="none" *ngIf="tattoo.image"><img  src="{{tattoo.image}}" height="400px" width="400px" ></ion-item>
-     </div> -->
+   <section class="upload-tattoo">
+
+   </section>
  
     <section class="form-container">
         
@@ -37,20 +33,19 @@
                       </ion-item>
                       
                   
-                  <ion-item>
+                  <ion-item style="margin-bottom: 10%;">
                        
                           <ion-input type="text" name="name" [(ngModel)]="password" placeholder="Enter password"></ion-input>                            
                     </ion-item>
                       
-                     <ion-item>
-                           <button (click)="register()">Register</button> or  <button (click)="SignIn()">SignIn</button>
-                     </ion-item>
+                  
+                           <ion-button shape="block" color="secondary" (click)="register()">Register</ion-button> 
+                    
+                     <div class="signin">
+                        <p>Already have an Account? </p><ion-button  fill="clear" size="small" (click)="SignIn()">Sign In</ion-button>
+                     </div>
                      
                 </ion-list>
-            
-
-
-   
     </section>
   </main>
   

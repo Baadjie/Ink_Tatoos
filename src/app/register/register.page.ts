@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
         email : this.email,
       })
            console.log("Logged in");
-           this.DeliverDataService.showProfile = true;
+       
 
 console.log("1111111111111111111111", firebase.auth().currentUser.email);
 
