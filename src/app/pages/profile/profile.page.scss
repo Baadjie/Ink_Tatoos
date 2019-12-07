@@ -168,9 +168,9 @@
 }
 
 .profile-container {
-    flex-basis: 40%;
+    height: 40vh;
     padding: 1em;
-    flex-shrink: 0;
+ 
     .profile-info {
         background: #fff;
         height: 100%;
@@ -283,7 +283,8 @@
 
 
 .details-container {
-    flex-basis: 60%;
+    height: 50vh;
+
     display: flex;
     border-radius: 10px;
     padding: 1em;
@@ -292,7 +293,7 @@
 
 .history-booking {
         background: #fff;
-        height: 100%;
+    
          border-radius: .2em; 
         flex-basis: 60%;
        display: flex;
@@ -305,9 +306,11 @@
 }
 .booking-card {
     flex-basis: 90%;
-    height: 100%;
+    height: 90%;
+
     flex-wrap: wrap;
     display: flex;
+    overflow: auto;
     justify-content: flex-start;
    
 
