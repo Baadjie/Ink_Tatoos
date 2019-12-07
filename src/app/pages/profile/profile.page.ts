@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router) { }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2) { }
 
 
   loader = true;
@@ -24,7 +24,8 @@ export class ProfilePage implements OnInit {
 
   userID :string;
 
-  
+  edit: boolean = false;
+  editDivModal = document.getElementsByClassName('modal');
   
   db = firebase.firestore();
 
@@ -41,6 +42,16 @@ export class ProfilePage implements OnInit {
     })
     }
 
+
+    modalAnimate() {
+      this.edit = !this.edit;
+
+      if(this.edit) {
+        this.rendered.addClass(this.editDivModal[0], 'modalView');
+      }else {
+        this.rendered.addClass(this.editDivModal[0], 'modalHide');
+      }
+    }
   
   ionViewWillEnter(){
 
