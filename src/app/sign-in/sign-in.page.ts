@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from "firebase";
 import { Router } from '@angular/router';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 
 
@@ -26,16 +27,37 @@ export class SignInPage implements OnInit {
   AcceptedData = [];
 
   showProfileState: boolean
+  tattooForm : FormGroup;
+  validation_messages = {
+  
+    'email': [
+      {type: 'required', message: 'Email address is required.'},
+      {type: 'pattern', message: 'Email address is not Valid.'},
+      {type: 'validEmail', message: 'Email address already exists in the system.'},
+    ],
+    'password': [
+      {type: 'required', message: 'Password is required.'},
+      {type: 'maxlength', message: 'password must be atleast 6 char'},
+    ]
 
-  constructor(public modalController : ModalController, public Router : Router,  public DeliverDataService : DeliverDataService) { }
+  }
+  constructor(public modalController : ModalController, private fb: FormBuilder,public Router : Router,  public DeliverDataService : DeliverDataService) { }
 
   ngOnInit() {
     this.showProfile();
+    this.tattooForm = this.fb.group({
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
+     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)]))
+    })
   }
+  
+  
 
 
-  login(){
+  login(tattooForm){
 
+
+    if (this.tattooForm.valid ) {
    firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
 
     console.log("=========================");
@@ -53,7 +75,7 @@ export class SignInPage implements OnInit {
                 // console.log("@@@@@@@@@", this.DeliverDataService.AcceptedData);
               }   
             })
-        
+          
       })
       // return true; 
          }
@@ -61,6 +83,14 @@ export class SignInPage implements OnInit {
         })
       })
     }
+
+
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+      console.log("qqqqqqqqqqqqqq ", data.data().name);
+      this.DeliverDataService.name = data.data().name;
+      
+    })
+  
 
     this.Router.navigateByUrl('/xplore')
 
@@ -76,7 +106,7 @@ export class SignInPage implements OnInit {
     'dismissed': true
   });
 
-
+    }
 
 
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router) { }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2) { }
 
 
   loader = true;
@@ -19,12 +19,16 @@ export class ProfilePage implements OnInit {
   email: string;
 
   Requests=[];
+  Bookings=[];
 
   Response=[];
 
   userID :string;
 
-  
+  name="";
+
+  edit: boolean = false;
+  editDivModal = document.getElementsByClassName('modal');
   
   db = firebase.firestore();
 
@@ -41,8 +45,43 @@ export class ProfilePage implements OnInit {
     })
     }
 
+
+    modalAnimate() {
+      this.edit = !this.edit;
+
+      if(this.edit) {
+        this.rendered.addClass(this.editDivModal[0], 'modalView');
+      }else {
+        this.rendered.addClass(this.editDivModal[0], 'modalHide');
+      }
+    }
   
   ionViewWillEnter(){
+
+
+
+
+         //User's details
+         this.email=firebase.auth().currentUser.email;
+   
+         this.db.collection("Bookings").onSnapshot(data => {         
+           data.forEach(item => {
+             if(item.exists){
+
+              this.User=[];
+               if(item.data().email === this.email){
+
+                this.DeliverDataService.name = item.data().name;
+                this.name = item.data().name
+                 
+                 this.User.push(item.data());
+                 
+                 console.log("Testing",item.data().name);
+               }
+             }
+           })
+         })
+       
 
       
     if(firebase.auth().currentUser){
@@ -83,10 +122,20 @@ export class ProfilePage implements OnInit {
           
         })
       })
+
+
+        
+
+
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
+      //   data.forEach(i => {
+      //     console.log("ewewew ", i.data());
+      //     this.Requests.push(i.data());
+
+          
+      //   })
+      // })
       
-      //response
-
-
 
 
   

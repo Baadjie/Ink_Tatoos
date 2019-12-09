@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
   templateUrl: './xplore.page.html',
   styleUrls: ['./xplore.page.scss'],
 })
-
-
 export class XplorePage implements OnInit {
 
 
@@ -46,17 +44,19 @@ tattoo = {
   MyValue1: boolean;
   num: number;
   docId: string;
-
   query: any[];
-
   Design = [];
-
-
   Sketch = [];
   PreviouseWork = [];
   porpular = []
   respnses = []
   AcceptedData = [];
+
+  ShowName=[];
+
+  name = "";
+
+  email: string;
  
 
   showProfile1 : boolean = false;
@@ -65,14 +65,8 @@ tattoo = {
 
     this.respnses = this.DeliverDataService.AcceptedData;
    
-
-    this.showProfile1=!this.showProfile1;
-    // if(this.DeliverDataService.AcceptedData.length > 0){
-    //   DeliverDataService.AcceptedData.forEach(data => {
-    //     this.respnses.push(data);
-    //   })
-    // }
    
+
  
 
    }
@@ -104,7 +98,7 @@ tattoo = {
             })
         
       })
-      // return true; 
+      
          }
         
         })
@@ -113,39 +107,44 @@ tattoo = {
 
    }
 
+ 
+
    ionViewWillEnter(){
+
+    this.name = this.DeliverDataService.name;
+
+           //User's details
+           this.email=firebase.auth().currentUser.email;
+
+          
+   
+           this.db.collection("Bookings").onSnapshot(data => {         
+             data.forEach(item => {
+               if(item.exists){
+  
+                this.ShowName=[];
+                 if(item.data().email === this.email){
+                   this.DeliverDataService.name = item.data().name;
+                   this.name = item.data().name
+                   this.ShowName.push(item.data());
+                   console.log("ShowName",item.data().name);
+                 }
+               }
+             })
+           })
+         
  
   
     this.showProfile();
 
 
 
-
-
-
-    // this.db.collection('Tattoo').onSnapshot(data => {
-    //   this.Tattoos = [];
-    
-    //   data.forEach(item => {
-    //     firetattoo.doc = item.data();
-    //     firetattoo.docid = item.id;
-    //     this.Tattoos.push(firetattoo)
-
-      
-
-    //      firetattoo = {
-    //       docid: '',
-    //       doc: {}
-    //     }
-    //   })
-
-    //   console.log("Your tattoos ",  this.Tattoos );
-      
-      
-    // })
-
   }
 
+
+
+
+  
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -185,28 +184,24 @@ tattoo = {
         }
       })
     })
-
-
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
           if(item.data().categories === "Previous work"){
             
            this.PreviouseWork.push(item.data());
-          //  console.log("11111111111111111",this.PreviouseWork);
+         
           }
         }
       })
     })
-
-
     this.db.collection("Tattoo").onSnapshot(data => {
       data.forEach(item => {
         if(item.exists){
           if(item.data().categories === "Sketch/design"){
             
            this.porpular.push(item.data());
-          //  console.log("11111111111111111",this.Sketch);
+       
           }
         }
       })
@@ -217,15 +212,12 @@ tattoo = {
 
 
 async CreateAccount(){
-
   let modal = await this.modalController.create({
     component : RegisterPage
   })
   this.showProfile();
   return await modal.present();
 }
-
-
 async Login(){
 
  
@@ -242,9 +234,7 @@ async Login(){
 
 
 }
-
 logOut(){
-
   firebase.auth().signOut().then(user => {
     console.log("Logged out successfully");
 
@@ -255,9 +245,7 @@ logOut(){
 
  
 }
-
  async Booking(tattoo){
-
     if(firebase.auth().currentUser){
 
       this.showProfile1 = true;
@@ -265,12 +253,14 @@ logOut(){
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
       // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+
+        this.ShowName.push(firebase.auth().currentUser.email);
+        console.log("display name ", this.ShowName);
       //   name : "Simon",
       //   surname : "Cowel",
       //   legnth : "153",
       //   breadth : "353"
       // })
-
       this.DeliverDataService.dataSaved.category = tattoo.categories;
       this.DeliverDataService.dataSaved.description = tattoo.description;
       this.DeliverDataService.dataSaved.image = tattoo.image;
@@ -281,15 +271,11 @@ logOut(){
    
 
       console.log("Your data in the service",  this.DeliverDataService.dataSaved);
-
       const modal = await this.modalController.create({
         component: BookingModalPage
       });
       return await  modal.present();
-
-
     }else{
-
       console.log("Sorry no user here");
       const modal = await this.modalController.create({
         component: RegisterPage
@@ -298,7 +284,6 @@ logOut(){
       
     }
     
-
    
   
     
@@ -363,13 +348,15 @@ logOut(){
 
 
   pb(){
-
-
   }
-
   obj = {id: null, obj : null}
 
 
 
 
 }
+
+
+
+
+
