@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <nav class="nav-bar">
+    <div class="navigation animated slideInDown delay-1s">
+      <div class="logo">
+        <img src="../../../assets/anotherLogo.svg" width="100px" alt="">
+      </div>
+      <div class="list">
+        <ul>
+            <li><a routerLink="/xplore"  >Explore</a></li>
+            <li><a>Contact Us</a></li>
+            <li *ngIf="!showProfile1" (click)="Login()" ><a>Sign In</a></li>
+            <button *ngIf="!showProfile1" class="btn-create-account riffle" (click)="CreateAccount()">Create Account</button>
+            
+        </ul>
+        
+    
+
+        <ion-button class="btn-menu" fill="clear" color="light" size="large">
+            <ion-icon name="menu"> </ion-icon>
+          </ion-button>
+      </div>
+
+    </div>
+  </nav>
+
+
+    <header>
+        <br>
+      <h6>Contact Us</h6>
+      <br>
+    </header>
+      <div *ngFor="let contact of Contact">
+
+        <p> {{ contact.doc.address}} </p>
+        <p> {{ contact.doc.email}} </p>
+        <p> {{ contact.doc.phoneNumber}} </p>
+        <p></p>    
+
+
+      </div>
+
+</ion-content>

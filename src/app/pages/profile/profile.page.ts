@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { NotificationsPage } from 'src/app/notifications/notifications.page';
 
 @Component({
   selector: 'app-profile',
@@ -9,8 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  respnses=[]
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2) { }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2,public modalController: ModalController) { 
+
+
+    this.respnses = this.DeliverDataService.AcceptedData;
+  }
 
 
   loader = true;
@@ -19,10 +26,13 @@ export class ProfilePage implements OnInit {
   email: string;
 
   Requests=[];
+  Bookings=[];
 
   Response=[];
 
   userID :string;
+
+  name="";
 
   edit: boolean = false;
   editDivModal = document.getElementsByClassName('modal');
@@ -53,7 +63,43 @@ export class ProfilePage implements OnInit {
       }
     }
   
+
+    async Notifications(){
+      console.log("ttttttttt", this.respnses);
+     let modal = await this.modalController.create({
+        component : NotificationsPage,
+        cssClass: 'modalNotification'
+      })
+      return await modal.present();
+    }
+
+
   ionViewWillEnter(){
+
+
+
+
+         //User's details
+         this.email=firebase.auth().currentUser.email;
+   
+         this.db.collection("Bookings").onSnapshot(data => {         
+           data.forEach(item => {
+             if(item.exists){
+
+              this.User=[];
+               if(item.data().email === this.email){
+
+                this.DeliverDataService.name = item.data().name;
+                this.name = item.data().name
+                 
+                 this.User.push(item.data());
+                 
+                 console.log("Testing",item.data().name);
+               }
+             }
+           })
+         })
+       
 
       
     if(firebase.auth().currentUser){
@@ -94,10 +140,20 @@ export class ProfilePage implements OnInit {
           
         })
       })
+
+
+        
+
+
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
+      //   data.forEach(i => {
+      //     console.log("ewewew ", i.data());
+      //     this.Requests.push(i.data());
+
+          
+      //   })
+      // })
       
-      //response
-
-
 
 
   

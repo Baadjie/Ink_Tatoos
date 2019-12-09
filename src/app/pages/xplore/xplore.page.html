@@ -35,7 +35,7 @@
                 <ul class="list">
                   <div class="wraper-list animated" [ngClass]="{'slideInDown':menu, 'tada':!menu}" >
                       <li ><a routerLink="/xplore">Explore</a></li>
-                      <li><a routerLink="/">Contact Us</a></li>
+                      <li><a routerLink="/contact-us">Contact Us</a></li>
                       <li *ngIf="!showProfile1" (click)="Login()" ><a>Sign In</a></li>
                       <li *ngIf="showProfile1" (click)="logOut()" ><a>Sign Out</a></li>
                       <button *ngIf="!showProfile1" class="btn-create-account riffle" (click)="CreateAccount()">Create Account</button>
@@ -44,8 +44,8 @@
                       </ion-button>
                   </div>
                     
-                    <div class="profile" *ngIf="showProfile1" routerLink="/profile">
-                      <p class="profile-name">Khuthy Muenda</p>
+                    <div class="profile" *ngIf="showProfile1" routerLink="/profile"  ShowName >
+                      <p class="profile-name">{{name}}</p>
                       <div class="image-profile">
                           <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
                       </div>

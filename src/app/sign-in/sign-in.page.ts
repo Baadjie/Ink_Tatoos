@@ -55,6 +55,8 @@ export class SignInPage implements OnInit {
 
 
   login(tattooForm){
+
+
     if (this.tattooForm.valid ) {
    firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
 
@@ -81,6 +83,13 @@ export class SignInPage implements OnInit {
         })
       })
     }
+
+
+    this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
+      console.log("qqqqqqqqqqqqqq ", data.data().name);
+      this.DeliverDataService.name = data.data().name;
+      
+    })
   
 
     this.Router.navigateByUrl('/xplore')

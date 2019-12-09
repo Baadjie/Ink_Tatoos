@@ -11,6 +11,8 @@ export class DeliverDataService {
 
   logout :boolean =false;
 
+  name  = "";
+
   get isLoggedIn() {
     
     return true;
