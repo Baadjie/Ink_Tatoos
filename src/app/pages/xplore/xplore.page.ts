@@ -59,12 +59,14 @@ tattoo = {
   AcceptedData = [];
  
 
-  showProfile1 : boolean = true;
+  showProfile1 : boolean = false;
 
   constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
    
+
+    this.showProfile1=!this.showProfile1;
     // if(this.DeliverDataService.AcceptedData.length > 0){
     //   DeliverDataService.AcceptedData.forEach(data => {
     //     this.respnses.push(data);
