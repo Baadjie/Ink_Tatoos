@@ -31,6 +31,10 @@ export class RegisterPage implements OnInit {
       { type: 'required', message: 'Name  is required.' },
 
     ],
+    'number': [
+      { type: 'required', message: 'Number  is required.' },
+
+    ],
     'email': [
       {type: 'required', message: 'Email address is required.'},
       {type: 'pattern', message: 'Email address is not Valid.'},
@@ -47,7 +51,8 @@ export class RegisterPage implements OnInit {
     this.tattooForm = this.fb.group({
       name: new FormControl('', Validators.compose([Validators.required])),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
-     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)]))
+     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)])),
+     number: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)]))
     })
   }
   
@@ -78,7 +83,7 @@ export class RegisterPage implements OnInit {
 
 console.log("1111111111111111111111", firebase.auth().currentUser.email);
 
-
+this.dismiss()
            this.modalController.dismiss({
             'dismissed': true
           });

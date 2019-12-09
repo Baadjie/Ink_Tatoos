@@ -30,6 +30,9 @@ export class AppComponent {
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
 
+
+
+ 
     
 
 

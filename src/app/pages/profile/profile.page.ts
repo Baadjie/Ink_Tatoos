@@ -19,10 +19,13 @@ export class ProfilePage implements OnInit {
   email: string;
 
   Requests=[];
+  Bookings=[];
 
   Response=[];
 
   userID :string;
+
+  name="";
 
   edit: boolean = false;
   editDivModal = document.getElementsByClassName('modal');
@@ -54,6 +57,31 @@ export class ProfilePage implements OnInit {
     }
   
   ionViewWillEnter(){
+
+
+
+
+         //User's details
+         this.email=firebase.auth().currentUser.email;
+   
+         this.db.collection("Bookings").onSnapshot(data => {         
+           data.forEach(item => {
+             if(item.exists){
+
+              this.User=[];
+               if(item.data().email === this.email){
+
+                this.DeliverDataService.name = item.data().name;
+                this.name = item.data().name
+                 
+                 this.User.push(item.data());
+                 
+                 console.log("Testing",item.data().name);
+               }
+             }
+           })
+         })
+       
 
       
     if(firebase.auth().currentUser){
@@ -94,10 +122,20 @@ export class ProfilePage implements OnInit {
           
         })
       })
+
+
+        
+
+
+      // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
+      //   data.forEach(i => {
+      //     console.log("ewewew ", i.data());
+      //     this.Requests.push(i.data());
+
+          
+      //   })
+      // })
       
-      //response
-
-
 
 
   
