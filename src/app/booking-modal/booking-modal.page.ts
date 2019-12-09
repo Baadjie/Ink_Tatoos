@@ -1,9 +1,10 @@
 import { SuccessPagePageModule } from './../success-page/success-page.module';
 import { DeliverDataService } from './../deliver-data.service';
 import { ModalController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { SuccessPagePage } from '../success-page/success-page.page';
+import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 
 
@@ -16,11 +17,12 @@ import { SuccessPagePage } from '../success-page/success-page.page';
 export class BookingModalPage implements OnInit {
 
 
-    Length : number = 0;
-    Breadth : number = 0;
-
-
-
+    Length : number ;
+    Breadth : number;
+    
+    describe = true;
+    describeDiv = document.getElementsByClassName('description');
+    icon = 'ios-arrow-down';
     category = "" 
     description = "" 
     image = "" 
@@ -30,11 +32,25 @@ export class BookingModalPage implements OnInit {
     Cname = "";
     number : any = 0;
     db = firebase.firestore()
+    tattooForm : FormGroup;
+    validation_messages = {
+      'Length': [
+        { type: 'required', message: 'Length  is required.' },
+  
+      ],
+      'Breadth': [
+        { type: 'required', message: 'Breadth  is required.' },
+  
+      ],
+    }
+        
 
-
-
-  constructor(public DeliverDataService: DeliverDataService, private modalController: ModalController) { }
-
+  constructor(public DeliverDataService: DeliverDataService,private fb: FormBuilder, private modalController: ModalController, private render: Renderer2) { 
+  this.tattooForm = this.fb.group({
+    Length: new FormControl('', Validators.compose([Validators.required])),
+    Breadth: new FormControl('', Validators.compose([Validators.required])),
+  })
+}
   ngOnInit() {
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
@@ -42,9 +58,10 @@ export class BookingModalPage implements OnInit {
       this.number = data.data().number;
     })
 
-   
-
   }
+  
+
+  
 
   ionViewWillEnter(){
     
@@ -59,8 +76,27 @@ export class BookingModalPage implements OnInit {
 
   }
 
+  closeDescriptionAnimate() {
+    this.describe = !this.describe
+    if (this.describe) {
+      this.render.setStyle(this.describeDiv[0],'display','block');
+      this.render.setStyle(this.describeDiv[0],'hight','40%');
+       this.render.setStyle(this.describeDiv[0],'overflow','auto');
+      this.icon = 'ios-arrow-down';
+    } else {
+      setTimeout(() => {
+       this.render.setStyle(this.describeDiv[0],'height','10%');
+       this.render.setStyle(this.describeDiv[0],'overflow','hidden');
+       this.icon = 'ios-arrow-up';
+       /* this.render.setStyle(this.describeDiv[0],'display','none'); */
+      }, 500);
+    }
+    
+  }
+
   senBookig(){
  
+    if (this.tattooForm.valid ) {
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
 
             
@@ -91,7 +127,7 @@ export class BookingModalPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
-    
+  }
   }
 
   dismiss() {

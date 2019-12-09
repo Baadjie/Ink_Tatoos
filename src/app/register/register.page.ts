@@ -25,17 +25,38 @@ export class RegisterPage implements OnInit {
   number : number ;
 
 
+  tattooForm : FormGroup;
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name  is required.' },
+
+    ],
+    'email': [
+      {type: 'required', message: 'Email address is required.'},
+      {type: 'pattern', message: 'Email address is not Valid.'},
+      {type: 'validEmail', message: 'Email address already exists in the system.'},
+    ],
+    'password': [
+      {type: 'required', message: 'Password is required.'},
+      {type: 'maxlength', message: 'password must be atleast 6 char'},
+    ]
+  }
   constructor(public DeliverDataService : DeliverDataService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder) { }
 
   ngOnInit() {
- 
+    this.tattooForm = this.fb.group({
+      name: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
+     password: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(6)]))
+    })
   }
+  
 
   register(){
 
   
 
-    
+    if (this.tattooForm.valid ) {
   
 
     firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
@@ -62,7 +83,7 @@ console.log("1111111111111111111111", firebase.auth().currentUser.email);
             'dismissed': true
           });
     });
-
+  }
 
   }
 

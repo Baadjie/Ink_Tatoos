@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { AuthGuardService } from './auth-guard.service';
 
 
 
@@ -26,6 +27,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NotificationsPageModule, BookingModalPageModule, RegisterPageModule, SuccessPagePageModule, SignInPageModule],
   providers: [
     StatusBar,
+    AuthGuardService,
     SplashScreen,
     OneSignal,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

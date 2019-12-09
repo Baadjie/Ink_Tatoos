@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'explore', pathMatch: 'full' },
@@ -12,11 +13,13 @@ const routes: Routes = [
   {
     path: 'xplore',
     loadChildren: () => import('./Pages/xplore/xplore.module').then( m => m.XplorePageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    canActivate:[AuthGuardService],
     path: 'booking-modal',
     loadChildren: () => import('./booking-modal/booking-modal.module').then( m => m.BookingModalPageModule)
   },
@@ -29,12 +32,18 @@ const routes: Routes = [
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   {
-    path: 'notifications',
+    canActivate:[AuthGuardService],
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+ path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
 
 
 ];
+   
 
 @NgModule({
   imports: [
