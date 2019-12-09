@@ -36,6 +36,30 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+
+    .onboarding {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.803);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .container-onboarding {
+            position: relative;
+            flex-basis: 50%;
+            width: 50%;
+            height: 70%;
+            background: #fff;
+            border-radius: 10px;
+
+        }
+    }
     
     .header {
         flex-basis: 40%;
@@ -47,6 +71,7 @@
         display: flex;
         flex-direction: column;
         position: relative;
+        z-index: -1;
 
         .user-header {
             flex-basis: 15%;
@@ -57,6 +82,12 @@
             flex-wrap: wrap;
             padding-left: 1em;
             padding-right: 1em;
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
 
             .list {
                 display: flex;
@@ -191,11 +222,11 @@
             position: relative;
             padding: 1em;
             flex-basis: 85%;
-
+            
            .ink {
                position: absolute;
-               top: 0;
-               left: 0;
+               top: 0%;
+               left: -5%;
                height: 100%;
                width: 30%;
               
@@ -204,8 +235,9 @@
             position: absolute;
             bottom: 0;
             right: 0;
+           
             font-size: 100px;
-            color: #db6c507e;
+            color: rgba(219, 108, 80, 0.162);
             margin: 0 !important;
             font-weight: bold;
             
@@ -215,9 +247,10 @@
                display: flex;
                position: relative;
                z-index: 1;
-               justify-content: center;
+              /*  justify-content: center; */
                align-items: flex-start;
                flex-direction: column;
+               justify-content: space-evenly;
                 height: 100%;
                 width: 90%;
                 margin: 0 auto;
@@ -378,9 +411,11 @@
                         width: 100%;
                         position: relative;
                         border-radius: 6px;
-                        box-shadow: 0 0 3px 0 rgb(221, 221, 221);
+                       
                         overflow: hidden;
                         font-size: 80%;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.281);
                         .booking {
                             position: absolute;
                             bottom: 0;
@@ -390,17 +425,30 @@
                             z-index: 20;
                             display: flex;
                             align-items: flex-end;
+                            background: #000;
+
+                            &::after {
+                                position: absolute;
+                                top: 5%;
+                                width: 3px;
+                                border-radius: 50px;
+                                height: 90%;
+                                bottom: 5%;
+                                background: rgb(255, 174, 0);
+                                content: '';
+                            }
+
                          /*    display: none; */
                             .btn-book {
                                 width: 100%;
-                                --background: #db6c50be; 
+                               
                              
                             }
                            
                         }
 
                         .info-tattoo {
-                            height: 100%;
+                            height: 75%;
                             width: 100%;
                             position: absolute;
                             top: 0;
@@ -408,18 +456,26 @@
                             overflow: auto;
                             background: rgba(0,0,0,0.5);
                             z-index: 10;
-                             display: none; 
+                             display: none;   
+                            padding: 1em;
 
                             article {
                                 /* padding: .5em; */
                                 color: #fff;
                                 display: -webkit-box;
                                 -webkit-box-orient: vertical;
-                                -webkit-line-clamp: 2;
+                                -webkit-line-clamp: 5;
                                 overflow: hidden;
-                                font-size: 80%;
+                                font-size: 100%;
                               /*   display: none; */
                             
+                              h4 {
+                                  text-align: center;
+
+                              }
+                              p {
+
+                              }
                             }
                         }
 
@@ -450,10 +506,14 @@
        
     }
 
-    .previous-work:hover{
-            filter: saturate(4);
+   .tattoo-cards:hover{
+            filter: saturate(10%);
        
     }
+     .tattoo-cards:hover .info-tattoo{
+       display: block;
+   
+}
     @media only screen and (max-width : 600px) {
         .tattoo-container {
             width: 100%;

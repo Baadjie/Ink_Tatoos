@@ -5,7 +5,7 @@ import { DeliverDataService } from './../../deliver-data.service';
 import { RegisterPage } from './../../register/register.page';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -59,9 +59,9 @@ tattoo = {
   email: string;
  
 
-  showProfile1 : boolean = false;
+  showProfile1;
 
-  constructor(public DeliverDataService : DeliverDataService,   public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
+  constructor(public DeliverDataService : DeliverDataService, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
    
@@ -70,6 +70,8 @@ tattoo = {
  
 
    }
+
+
 
    async Notifications(){
      console.log("ttttttttt", this.respnses);
@@ -283,9 +285,6 @@ logOut(){
       return await  modal.present();
       
     }
-    
-   
-  
     
   }
 
