@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { NotificationsPage } from 'src/app/notifications/notifications.page';
 
 @Component({
   selector: 'app-profile',
@@ -9,8 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  respnses=[]
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2) { }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2,public modalController: ModalController) { 
+
+
+    this.respnses = this.DeliverDataService.AcceptedData;
+  }
 
 
   loader = true;
@@ -56,6 +63,17 @@ export class ProfilePage implements OnInit {
       }
     }
   
+
+    async Notifications(){
+      console.log("ttttttttt", this.respnses);
+     let modal = await this.modalController.create({
+        component : NotificationsPage,
+        cssClass: 'modalNotification'
+      })
+      return await modal.present();
+    }
+
+
   ionViewWillEnter(){
 
 

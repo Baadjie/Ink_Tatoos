@@ -10,8 +10,8 @@
         </div>
         <div class="list">
           <ul>
-              <li><a routerLinkActive>Explore</a></li>
-              <li><a>Contact Us</a></li>
+              <li><a routerLink="/xplore">Explore</a></li>
+              <li><a routerLink="/contact-us">Contact Us</a></li>
           </ul>
 
           <div class="profile">
@@ -20,7 +20,7 @@
               <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
             </div>
           </div>
-          <div class="notifications">
+          <div class="notifications"  (click)="Notifications()">
             <ion-button fill="clear" color="light" size="large">
               <ion-icon name="notifications-outline"> </ion-icon>
             </ion-button>
@@ -56,8 +56,8 @@
                        <div  *ngFor="let user of User" class="information-profile">
                           <p>Name   :  {{ user.name}}</p>
                           <p>Email  : {{ user.email}}</p>
-                          <p>Physical Address</p>
-                          <p>072347324638</p>
+                      
+                          <p>{{user.number}}</p>
                         </div>
                   </div>
                   <ion-fab-button (click)="modalAnimate()" size="small" color="success">
