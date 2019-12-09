@@ -247,9 +247,6 @@ logOut(){
       
     }
     
-   
-  
-    
   }
 
   // viewNotifications() {

@@ -30,6 +30,7 @@ export class BookingModalPage implements OnInit {
     name = ""
   
     Cname = "";
+    number : any = 0;
     db = firebase.firestore()
     tattooForm : FormGroup;
     validation_messages = {
@@ -54,6 +55,7 @@ export class BookingModalPage implements OnInit {
 
     this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).get().then(data => {
       this.Cname = data.data().name;  
+      this.number = data.data().number;
     })
 
   }
@@ -108,6 +110,7 @@ export class BookingModalPage implements OnInit {
       email : firebase.auth().currentUser.email,
       uid : firebase.auth().currentUser.uid,
       customerName : this.Cname,
+      number : this.number,
       bookingState : 'waiting'
 
 

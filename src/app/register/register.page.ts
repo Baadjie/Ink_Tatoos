@@ -22,6 +22,9 @@ export class RegisterPage implements OnInit {
   email = '';
   password = '';
   db=firebase.firestore();
+  number : number ;
+
+
   tattooForm : FormGroup;
   validation_messages = {
     'name': [
@@ -68,6 +71,7 @@ export class RegisterPage implements OnInit {
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
         name : this.name,
         email : this.email,
+        number : this.number
       })
            console.log("Logged in");
        
