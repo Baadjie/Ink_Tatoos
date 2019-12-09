@@ -47,10 +47,12 @@ export class AppComponent {
     });
   }
 
+  
+
 
   setupPush() {
     // I recommend to put these into your environment.ts
-    this.oneSignal.startInit('YOUR ONESIGNAL APP ID', 'YOUR ANDROID ID');
+    this.oneSignal.startInit('3ce1cb91-88ef-4205-a5e7-71eb3ceae6b6', '614855155179');
  
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
  
@@ -61,6 +63,8 @@ export class AppComponent {
       let additionalData = data.payload.additionalData;
       this.showAlert(title, msg, additionalData.task);
     });
+
+
  
     // Notification was really clicked/opened
     this.oneSignal.handleNotificationOpened().subscribe(data => {
