@@ -51,6 +51,12 @@ tattoo = {
   porpular = []
   respnses = []
   AcceptedData = [];
+
+  ShowName=[];
+
+  name = "";
+
+  email: string;
  
 
   showProfile1;
@@ -58,6 +64,7 @@ tattoo = {
   constructor(public DeliverDataService : DeliverDataService, public modalController: ModalController, public alertCtrl: AlertController, private render: Renderer2, private rout:Router) {
 
     this.respnses = this.DeliverDataService.AcceptedData;
+   
    
 
  
@@ -102,7 +109,32 @@ tattoo = {
 
    }
 
+ 
+
    ionViewWillEnter(){
+
+    this.name = this.DeliverDataService.name;
+
+           //User's details
+           this.email=firebase.auth().currentUser.email;
+
+          
+   
+           this.db.collection("Bookings").onSnapshot(data => {         
+             data.forEach(item => {
+               if(item.exists){
+  
+                this.ShowName=[];
+                 if(item.data().email === this.email){
+                   this.DeliverDataService.name = item.data().name;
+                   this.name = item.data().name
+                   this.ShowName.push(item.data());
+                   console.log("ShowName",item.data().name);
+                 }
+               }
+             })
+           })
+         
  
   
     this.showProfile();
@@ -111,6 +143,10 @@ tattoo = {
 
   }
 
+
+
+
+  
   showProfile(){
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
@@ -219,6 +255,9 @@ logOut(){
       console.log("Your uid here is ", firebase.auth().currentUser.uid);
       console.log("Your email here is ", firebase.auth().currentUser.email);
       // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").doc().set({
+
+        this.ShowName.push(firebase.auth().currentUser.email);
+        console.log("display name ", this.ShowName);
       //   name : "Simon",
       //   surname : "Cowel",
       //   legnth : "153",
