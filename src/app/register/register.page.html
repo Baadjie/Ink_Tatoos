@@ -34,9 +34,14 @@
 
                   <ion-item>
                        
-                      <ion-input type="tel" name="name" [(ngModel)]="number" placeholder="Enter Phone number"></ion-input>
+                      <ion-input type="tel" formControlName="number" name="name" [(ngModel)]="number" placeholder="Enter Phone number"></ion-input>
                     </ion-item>
-
+                    <div class="error" *ngFor="let validate of validation_messages.number">
+                      <div class="messages" *ngIf="tattooForm.get('number').hasError(validate.type) && (tattooForm.get('number').dirty || tattooForm.get('number').touched)">
+                        {{validate.message}}
+                    </div> 
+                  </div>
+                  
 
                      <ion-item>
                         <ion-input type="text" formControlName="email"name="name" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
