@@ -288,10 +288,6 @@ logOut(){
       
     }
     
-
-   
-  
-    
   }
 
   // viewNotifications() {

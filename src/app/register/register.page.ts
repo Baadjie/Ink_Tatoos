@@ -22,6 +22,7 @@ export class RegisterPage implements OnInit {
   email = '';
   password = '';
   db=firebase.firestore();
+  number : number ;
 
 
   constructor(public DeliverDataService : DeliverDataService,  private modalController: ModalController, public actionSheetController: ActionSheetController, private fb: FormBuilder) { }
@@ -49,6 +50,7 @@ export class RegisterPage implements OnInit {
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).set({
         name : this.name,
         email : this.email,
+        number : this.number
       })
            console.log("Logged in");
        
