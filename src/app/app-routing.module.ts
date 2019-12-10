@@ -39,11 +39,12 @@ const routes: Routes = [
   {
  path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
-  },  {
+  },
+  {
     path: 'contact-us',
     loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
   },
-
+ 
 
 
 ];
