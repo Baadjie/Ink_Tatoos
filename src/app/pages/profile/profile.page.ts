@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import * as firebase from 'firebase';
 import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +12,9 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2) { }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2,private file:File,public fileTransfer : FileTransferObject,  private transfer: FileTransfer)  { }
 
-
+  pdf;
   loader = true;
   User=[];
 
@@ -158,5 +160,16 @@ export class ProfilePage implements OnInit {
 
 
 }
+download() {
+
+  const fileTransfer: FileTransferObject = this.transfer.create();
+  fileTransfer.download(this.pdf, this.file.dataDirectory + 'file.pdf').then((entry) => {
+    console.log('download complete: ' + entry.toURL());
+  }, (error) => {
+    // handle error
+  });
+  
+}
+
 }
 
