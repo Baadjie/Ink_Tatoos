@@ -156,404 +156,119 @@
         }
 }
 
-.container {
-    flex: 1;
-    background: #fcfcff;
-    
-    display: flex;
-    flex-direction: column;
-
-
-
-}
-
-.profile-container {
-    height: 40vh;
-    padding: 1em;
- 
-    .profile-info {
-        background: #fff;
-        height: 100%;
-        border-radius: .5em;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: row;
-
-
-        .profile-here {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-
-
-            .name {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1em;
-                flex-basis: 20%;
-                flex-wrap: wrap;
-
-                h1 {
-                    font-size: 3vw;
-                    font-weight: bolder;
-                    color: #888;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                }
-
-            }
-            .profile-container-here {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-right: 30px;
-                padding-left: 30px;
-                flex-basis: 60%;
-
-                .wrap-now {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-basis: 20%;
-
-                    .image-profile-here {
-                        height: 20vh;
-                        width: 20vh;
-                        border-radius: 50%;
-                        overflow: hidden;
-                        margin-right: 30px;
-
-                        img {
-                            height: 100%;
-                            width: 100%;
-                            object-fit: cover;
-                        }
-                    }
-                    .information-profile {
-                      /*   font-weight: bold; */
-                        color: #888;
-                        font-size: 100%;
-                       
-                        p {
-                            padding: .5em;
-                        }
-
-                    }
-
-                }
-
-            }
-        }
-
-    }
-}
-
-.analytics {
+.header {
     flex-basis: 20%;
-    padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    position: relative;
 
-}
-
-.history,
-.accepted,
-.declined {
-    flex-basis: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    
-
-    p {
-        text-align: center;
-        font-size: 30px;
-        color: #888;
+    &::after {
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        content: '';
+        background: rgb(44, 44, 44);
     }
-
-}
-
-.history, .accepted {
-    border-right: 2px solid rgba(199, 199, 199, 0.5);
-}
-
-
-.details-container {
-    height: 50vh;
-
-    display: flex;
-    border-radius: 10px;
-    padding: 1em;
-    justify-content: space-between;
-}
-
-.history-booking {
-        background: #fff;
     
-         border-radius: .2em; 
-        flex-basis: 60%;
-       display: flex;
-       flex-direction: column;
-       position: relative;
-       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-
-       
 }
-.booking-card {
-    flex-basis: 90%;
-    height: 90%;
 
-    flex-wrap: wrap;
+.head {
+    position: relative;
+    z-index: 10;
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.information {
+    flex-basis: 20%;
+    background: #ddd;
     display: flex;
-    overflow: auto;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+
+}
+.information > div {
+    flex-basis: 30%;
+    text-align: center;
+}
+
+.map {
+    flex-basis: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+
+}
+.map-image {
+    flex-basis: 80%;
+    height: 80%;
+    position: relative;
    
 
-}
-.booking-list {
-    flex-basis: 50%;
-    height: 15vh;
-  
-    padding: 1em;
-}
-.booking-history-item {
-    height: 100%;
-    box-shadow: 0 0 3px #ddd;
-    border-radius: 5px;
-
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    .tattoo-booked {
-        flex-basis: 30%;
-        //height: 100%;
-        border-radius: 5px;
-        overflow: hidden;
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-
-        }
-    }
-    .btn-downloads {
+    &::before {
         position: absolute;
-      bottom: -15%;
-      left: 0;
-        padding-right: 3em;
-      width: 100%;
-      height: 30%;
-      display: flex;
-        justify-content: flex-end; 
-
-      .btn-downla {
+        top: 0;
+        left: -5%;
         height: 100%;
-        width: auto;
-        background: linear-gradient(#dadada, #7bc850);
-        padding: .3em;
-        color: #fff;
-        border-radius: 4px;
-        font-weight: bold;
-        outline: none;
+        width: 10px;
+        border-radius: 50px;
+        background: chocolate;
+        content: '';
 
-
-
-
-
-
-      }
-      .btn-downla:active {
-        background: linear-gradient( #7bc850, #dadada);
-      }
-      
     }
-    .info-tattoo {
-        padding: .5em;
-        color: #888;
+    &::after {
+        position: absolute;
+        top: 0;
+        right: -5%;
+        height: 100%;
+        width: 10px;
+        border-radius: 50px;
+        background: chocolate;
+        content: '';
 
     }
 
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
 }
-.customized-tattoo {
-    background: #fff;
-    height: 100%;
-    border-radius: .2em;
-    flex-basis: 30%;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-    
 
-    .scroll-container {
-        flex-basis: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-        
+@media all and (max-width: 600px) {
+    .information {
+        flex-flow: column-reverse;
+        padding: 1em;
+    }
+    .nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: red;
+        height: 30%;
+        z-index: 100;
 
-        .no-pictures {
-            flex-basis: 100%;
-            height: 100%;
-            background: rgb(241, 241, 241);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
-            transform: rotate(90deg);
+        .navigation {
+            flex-direction: column;
 
-            p {
-                text-align: center;
-                color: #888;
-            }
-        }
+            .list {
+                flex-direction: column;
 
-
-        .cards {
-            flex: 0 0 90%;
-            height: 40vh;
-            margin-left: -40px;
-          
-        /*     padding: 1em; */
-
-            .card {
-                background: #fff;
-                height: 100%;
-                width: 100%;
-                border-radius: 10px;
-                box-shadow: 0 0 5px #ddd;
-                transition: all 500ms;
-                border-radius: .2em;
-                overflow: hidden;
-                transform: scale(.8);
-                img {
-                    height: 100%;
-                    width: 100%;
-                    object-fit: cover;
-
-
+                ul {
+                    flex-direction: column;
                 }
             }
-
-            .card:hover {
-                transform: scale(1);
-                filter: saturate(4);
-                transition: all 500ms;
-                position: relative;
-                z-index: 100;
-            }
-        }
-    }
-}
-.header {
-    font-weight: bold;
-    font-size: 100%;
-    color: rgb(92, 92, 92);
-    flex-basis: 10%;
-
-    padding: 1.3em;
-    display: flex;
-    align-items: center;
-}
-
-.modalView {
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.404);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.small-modal-edit-profile {
-    flex-basis: 30%;
-    height: 50%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-    background: #fff;
-    border-radius: 5px;
-    position: relative;
-
-    .close-btn {
-        position: absolute;
-        top: -15%;
-        right: 0;
-
-
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .list   ul, .profile  p{
-            display: none;
-        }
-        .logo img { width: 60px;}
-        .btn-menu {
-            display: block;
-        }
-
-        .analytics > * {
-            flex: 1;
-        }
-
-        .small-modal-edit-profile {
-            flex-basis: 90%;
-            height: 60%;
-        }
-        .details-container {
-            flex-direction: column;
-        }
-        .history-booking {
-            flex-basis: 100%;
-            height: 100%;
-           
-        }
-        .customized-tattoo {
-            flex-basis: 100%;
-        }
-        .booking-card {
-            flex-direction: column;
-            .booking-list {
-                height: 5vh;
-                flex-basis: 20%;
-            }
-        }
-}
-
-/* @media only screen and (min-width: 1024px) {
-
-
-    .booking-card {
-        flex-direction: column;
-        .booking-list {
-            height: 5vh;
-            flex-basis: 20%;
-        }
-    }
-
-    .analytics > * {
-        flex: 1;
-    }
-
-    .history-booking {
-        flex-basis: 40%;
+        } 
        
     }
-    .customized-tattoo {
-        flex-basis: 50%;
-    }
-} */
+   
+}
