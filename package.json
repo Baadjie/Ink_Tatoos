@@ -36,7 +36,7 @@
     "enhanced-resolve": "^3.3.0",
     "firebase": "^7.5.0",
     "firebase-save": "^3.0.0",
-    "onesignal-cordova-plugin": "^2.7.0",
+    "onesignal-cordova-plugin": "2.7.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

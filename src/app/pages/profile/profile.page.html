@@ -11,7 +11,7 @@
         <div class="list">
           <ul>
               <li><a routerLink="/xplore">Explore</a></li>
-              <li><a>Contact Us</a></li>
+              <li><a routerLink="/contact-us">Contact Us</a></li>
           </ul>
 
           <div class="profile">
@@ -20,7 +20,7 @@
               <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
             </div>
           </div>
-          <div class="notifications">
+          <div class="notifications"  (click)="Notifications()">
             <ion-button fill="clear" color="light" size="large">
               <ion-icon name="notifications-outline"> </ion-icon>
             </ion-button>
@@ -56,8 +56,8 @@
                        <div  *ngFor="let user of User" class="information-profile">
                           <p>Name   :  {{ user.name}}</p>
                           <p>Email  : {{ user.email}}</p>
-                          <p>Physical Address</p>
-                          <p>072347324638</p>
+                      
+                          <p>{{user.number}}</p>
                         </div>
                   </div>
                   <ion-fab-button (click)="modalAnimate()" size="small" color="success">
@@ -65,17 +65,17 @@
                      </ion-fab-button>
                 </div>
                 <div class="analytics">
-                    <div class="history">
-                      <p>4</p>
-                      <p  style="color: #888; font-size: 16px;"><small>Booking History</small></p>
-                    </div>
+                    <!-- <div class="history">
+                      <p>{{NumberOfBookings}}</p>
+                      <p  style="color: #888; font-size: 16px;"><small> Total Bookings </small></p>
+                    </div> -->
                     <div class="accepted">
-                        <p>6</p>
-                        <p style="color: green; font-size: 16px;"><small>Booking History</small></p>
+                        <p>{{size}}</p>
+                        <p style="color: green; font-size: 16px;"><small>Accepted Bookings</small></p>
                       </div>
                       <div class="declined">
-                          <p>10</p>
-                          <p style="color: red; font-size: 16px;"><small>Booking History</small></p>
+                          <p>{{PendingSize}}</p>
+                          <p style="color: blue; font-size: 16px;"><small>Pending History</small></p>
                         </div>
                   </div>
              </div> 
@@ -92,15 +92,16 @@
               <p >History Bookings</p>
             </div>
               <div class="booking-card">
-                  <div class="booking-list" *ngFor="let request of Requests">
+                  <div class="booking-list" *ngFor="let request of Response">
                       <div class="booking-history-item">
                         <div class="tattoo-booked">
                           <img src="{{request.image}}" alt="">
                         </div>
                         <div class="info-tattoo">
-                            <p>Name {{request.tattoName}} </p>
-                            <p>Date</p>
-                            <p>2 Days Sessions</p>
+                            <p>Booking Status : {{request.bookingState}} </p>
+                            <p>Start Date     : {{request.startingDate | date: 'fullDate'}}</p>
+                            <p>End Date  : {{request.endingDate | date: 'fullDate'}}</p>
+                            <p>{{diffDays}} Days Sessions</p>
                         </div>
                         <div class="btn-downloads">
                            <button class="btn-downla" (click)="download()">
@@ -118,10 +119,10 @@
           <div class="customized-tattoo">
             <div class="header"><p>Your Customized Tattoos</p></div>
             <div class="scroll-container">
-              <!-- <div class="no-pictures">
+               <div class="no-pictures">
                 <p>You have not customized your favourate tattoo</p>
-              </div> -->
-               <div class="cards">
+              </div> 
+             <!--   <div class="cards" >
                 <div class="card">
                   <img src="../../../assets/sergio-rodriguez-portugues-del-olmo-IbnMDtiUP4Q-unsplash.jpg" alt="">
                 </div>
@@ -130,7 +131,7 @@
                   <div class="card">
                       <img src="../../../assets/matheus-ferrero-7EM79VNJsx4-unsplash.jpg" alt="">
                   </div>
-                </div> 
+                </div> --> 
             </div>
           </div>
         </div>
