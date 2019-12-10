@@ -4,11 +4,13 @@ import { DeliverDataService } from 'src/app/deliver-data.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { NotificationsPage } from 'src/app/notifications/notifications.page';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
+  providers: [DatePipe]
 })
 export class ProfilePage implements OnInit {
   respnses=[]
@@ -28,11 +30,18 @@ export class ProfilePage implements OnInit {
   Requests=[];
   Bookings=[];
 
+  startingDate;
+  endingDate;
+
   Response=[];
 
   userID :string;
 
   name="";
+
+  size;
+  PendingSize=0;
+  
 
   edit: boolean = false;
   editDivModal = document.getElementsByClassName('modal');
@@ -72,7 +81,9 @@ export class ProfilePage implements OnInit {
       })
       return await modal.present();
     }
-
+    diff;
+    diffDays;
+    
 
   ionViewWillEnter(){
 
@@ -82,18 +93,22 @@ export class ProfilePage implements OnInit {
          //User's details
          this.email=firebase.auth().currentUser.email;
    
-         this.db.collection("Bookings").onSnapshot(data => {         
+         this.db.collection("Bookings").onSnapshot(data => {
+        
+          
            data.forEach(item => {
+             
              if(item.exists){
 
-              this.User=[];
+             
                if(item.data().email === this.email){
 
                 this.DeliverDataService.name = item.data().name;
                 this.name = item.data().name
-                 
+                
                  this.User.push(item.data());
-                 
+              
+                 this.User=[];
                  console.log("Testing",item.data().name);
                }
              }
@@ -112,7 +127,7 @@ export class ProfilePage implements OnInit {
 
 
 
-
+        
 
 
         
@@ -131,20 +146,64 @@ export class ProfilePage implements OnInit {
             })
           })
         
-        //request  
+        
+         // this.Date;
+
+
+        //Response  
+      this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Response").get().then(data => {
+       
+        data.forEach(i => {
+          this.Response=[];
+          data.forEach(i => {
+           
+            if(i.exists){
+              if(i.data().bookingState === "Accepted"){
+                
+                console.log("ewewew ", i.data());
+                this.Response.push(i.data());
+
+                this.size=  this.Response.length;
+                
+                //this.date=i.data().startdate;
+                
+             
+               
+              }
+             
+            }
+          })
+    
+         
+          
+        })
+      })
+      
+
+
+      //Pending
       this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
         data.forEach(i => {
-          console.log("ewewew ", i.data());
-          this.Requests.push(i.data());
+          data.forEach(i => {
+            if(i.exists){
+              if(i.data().bookingState === "waiting"){
+                this.Requests=[];
+                console.log("ewewew ", i.data());
+                this.Requests.push(i.data());
+              
+                this.PendingSize=  this.Requests.length;
+              }
+            }
+          })
+    
 
           
         })
       })
 
 
-        
-
-
+  
+    
       // this.db.collection("Bookings").doc(firebase.auth().currentUser.uid).collection("Requests").get().then(data => {
       //   data.forEach(i => {
       //     console.log("ewewew ", i.data());

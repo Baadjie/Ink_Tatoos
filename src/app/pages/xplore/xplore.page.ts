@@ -237,7 +237,10 @@ async Login(){
 
 }
 logOut(){
+
+  this.ShowName=[];
   firebase.auth().signOut().then(user => {
+    
     console.log("Logged out successfully");
 
   }).catch(error => {
