@@ -65,17 +65,17 @@
                      </ion-fab-button>
                 </div>
                 <div class="analytics">
-                    <div class="history">
-                      <p>4</p>
-                      <p  style="color: #888; font-size: 16px;"><small>Booking History</small></p>
-                    </div>
+                    <!-- <div class="history">
+                      <p>{{NumberOfBookings}}</p>
+                      <p  style="color: #888; font-size: 16px;"><small> Total Bookings </small></p>
+                    </div> -->
                     <div class="accepted">
-                        <p>6</p>
-                        <p style="color: green; font-size: 16px;"><small>Booking History</small></p>
+                        <p>{{size}}</p>
+                        <p style="color: green; font-size: 16px;"><small>Accepted Bookings</small></p>
                       </div>
                       <div class="declined">
-                          <p>10</p>
-                          <p style="color: red; font-size: 16px;"><small>Booking History</small></p>
+                          <p>{{PendingSize}}</p>
+                          <p style="color: blue; font-size: 16px;"><small>Pending History</small></p>
                         </div>
                   </div>
              </div> 
@@ -92,18 +92,19 @@
               <p >History Bookings</p>
             </div>
               <div class="booking-card">
-                  <div class="booking-list" *ngFor="let request of Requests">
+                  <div class="booking-list" *ngFor="let request of Response">
                       <div class="booking-history-item">
                         <div class="tattoo-booked">
                           <img src="{{request.image}}" alt="">
                         </div>
                         <div class="info-tattoo">
-                            <p>Name {{request.tattoName}} </p>
-                            <p>Date</p>
-                            <p>2 Days Sessions</p>
+                            <p>Booking Status : {{request.bookingState}} </p>
+                            <p>Start Date     : {{request.startingDate | date: 'fullDate'}}</p>
+                            <p>End Date  : {{request.endingDate | date: 'fullDate'}}</p>
+                            <p>{{diffDays}} Days Sessions</p>
                         </div>
                         <div class="btn-downloads">
-                           <button class="btn-downla">
+                           <button class="btn-downla" (click)="download()">
                               <ion-icon name="download"></ion-icon> &nbsp; Download Contract
                            </button>
                         </div>

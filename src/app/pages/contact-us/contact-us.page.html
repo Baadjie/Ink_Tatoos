@@ -38,27 +38,26 @@
     <div class="header">
       <h1 class="head">Get In Touch With Us.</h1>
     </div>
-    <div class="information">
+    <div class="information"  *ngFor="let contact of Contact">
         <div class="phone">
           <ion-button fill="clear" color="dark" size="large">
             <ion-icon name="phone-portrait"></ion-icon>
           </ion-button>
-          <p>90675469509</p>
+          <p>{{ contact.doc.phoneNumber}} </p>
        
         </div>
         <div class="address">
           <ion-button fill="clear" color="dark" size="large">
             <ion-icon name="pin"></ion-icon>
           </ion-button>
-          <p>Johannesburg</p>
-          <p>Soweto Street zombie</p>
+          <p>{{ contact.doc.address}}</p>
+        
         </div>
         <div class="email">
           <ion-button fill="clear" color="dark" size="large">
             <ion-icon name="mail"></ion-icon>
           </ion-button>
-          <p>muendakhuthadzo@gmail.com</p>
-          <p>inktattoo@cmsmd.com</p>
+          <p> {{ contact.doc.email}}</p>
         </div>
     </div>
 
