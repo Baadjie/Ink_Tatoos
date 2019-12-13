@@ -17,7 +17,7 @@ import { DatePipe } from '@angular/common';
 export class ProfilePage implements OnInit {
   respnses=[]
 
-  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private rendered: Renderer2,private file:File,public fileTransfer : FileTransferObject,  private transfer: FileTransfer)  { this.respnses = this.DeliverDataService.AcceptedData; }
+  constructor(private DeliverDataService: DeliverDataService,private rout: Router, private modalController: ModalController, private rendered: Renderer2,private file:File, public fileTransfer : FileTransferObject,  private transfer: FileTransfer)  { this.respnses = this.DeliverDataService.AcceptedData; }
 
   pdf;
   loader = true;

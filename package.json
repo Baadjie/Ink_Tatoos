@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+    "@ionic-native/call-number": "^5.18.0",
     "@ionic-native/camera": "^5.17.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file": "^5.18.0",
@@ -30,8 +31,11 @@
     "@ionic/angular": "^4.7.1",
     "angular-animations": "0.0.10",
     "animate.css": "^3.7.2",
+    "call-number": "1.0.1",
     "cordova-android": "8.1.0",
     "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-file": "4.1.1",
+    "cordova-plugin-file-transfer": "1.5.1",
     "core-js": "^2.5.4",
     "enhanced-resolve": "^3.3.0",
     "firebase": "^7.5.0",
@@ -87,7 +91,10 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-firebase": {},
-      "onesignal-cordova-plugin": {}
+      "onesignal-cordova-plugin": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "mx.ferreyra.callnumber": {}
     },
     "platforms": [
       "android"
